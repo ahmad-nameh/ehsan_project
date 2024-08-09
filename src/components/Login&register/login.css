@@ -1,0 +1,97 @@
+.mainWrap {
+    background-color: var(--color2);
+    height: 100vh;
+    display: flex;
+    direction: ltr !important;
+}
+.mainWrap  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 90%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: auto;
+    transition: 0.5s;
+}
+.mainWrap  .container form {
+    transition: 0.5s;
+}
+.loginMode {
+    background-image:url("../../assets/login2.png"), url("../../assets/login1.png");
+    background-position: center,300px center;
+}
+@media(max-width:1250px) {
+    .loginMode {
+        background-image:url("../../assets/register2.png"), url("../../assets/register1.png");
+        background-position: center;
+    }
+}
+.signupMode {
+    background-image:url("../../assets/register2.png"), url("../../assets/register1.png");
+    background-position: center;
+}
+.formContainer {
+    background-color: var(--color2);
+    width: 650px;
+    min-height: 550px;
+    display: flex;
+    box-shadow: -10px -10px 20px white,5px 5px 12px rgb(0 0 0 / 20%);
+}
+@media(max-width:725px) {
+    .formContainer {
+        width: auto;
+    }
+    .formContainer img {
+        display: none;
+    }
+}
+.formWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 80px;
+    gap: 50px;
+}
+.formWrapper img {
+    order: 2;
+}
+.formWrapper input {
+    width: 100%;
+}
+.formWrapper button.login {
+    width: 100%;
+    color: white;
+    background-color: var(--color1);
+    padding: 10px;
+    border-radius: 10px;
+}
+.formWrapper button {
+    transition-duration: 0.5s;
+}
+.formWrapper button.clicked {
+    font-size: 23px;
+    color: var(--color7);
+    position: relative;
+}
+.formWrapper button.not-clicked {
+    color: #00000c5d;
+}
+.formWrapper button.clicked::before {
+    content: " ";
+    position: absolute;
+    bottom: -10px;
+    width: 50%;
+    border-bottom: 4px solid var(--color1);
+}
+
+.user-data:before {
+    content: " ";
+    width: 2px;
+    height: 100%;
+    position: absolute;
+    right: -40px;
+    top: 10px;
+    background-color: rgba(155, 155, 155, 0.2);
+}
