@@ -20,7 +20,7 @@ import ResponsiveDatePickers from "./components/Date/DatePikerOpened";
 import { AddEvent } from "./components/student/AddEvent";
 import {AddGrade }from "./components/student/AddGrade";
 import Home2 from "./Home2";
-import { Prog } from "./components/student/WProgram";
+import { WeekSchedule } from "./components/student/WeekSchedule";
 import ShowJoinToSystemRequest from "./components/TableShow/ShowJoinToSystemRequest ";
 import PopupWindow from "./components/student/popup/PopupWindow";
 import Event from "./components/student/Event";
@@ -89,6 +89,7 @@ const App = () => {
         <PopupWindow name="addEvent"/>
       ):click[8] ? (
         <PopupWindow name="addGrade"/>
+        
         // <PopupWindow name="addFile"/>
       ):null}
       </PopUp.Provider>

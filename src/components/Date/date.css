@@ -12,3 +12,6 @@
 .css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
     direction: rtl;
 }
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+    border: 0 !important;
+}

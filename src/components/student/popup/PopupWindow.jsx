@@ -4,9 +4,10 @@ import { motion } from "framer-motion";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { AddStu } from "../AddStu";
 import { AddEvent } from "../AddEvent";
-import { Prog } from "../WProgram";
+import { WeekSchedule } from "../WeekSchedule";
 import { AddGrade } from "../AddGrade";
 import { Addfile } from "../Addfile";
+import { ExamSchedule } from "../ExamSchedule";
 import Successimg from "../../../assets/pngwing.com.png"
 
 
@@ -81,7 +82,9 @@ const PopupWindow =(props) => {
               :(props.name === "addGrade") ? (
                 // <AddStu/>
                 // <AddEvent/>
-                <AddGrade/>
+                // <AddGrade/>
+                // <WeekSchedule/>
+                <ExamSchedule/>
               ) 
               :(props.name === "addFile") ? (
                 <Addfile/>
