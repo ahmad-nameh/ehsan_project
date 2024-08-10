@@ -89,6 +89,12 @@ const NavBar = () => {
                 <span>المقترحات</span>
               </NavLink>
             </button>
+            <button className="flex items-center">
+              <NavLink to="/setting" className="flex items-center ">
+                <DescriptionRoundedIcon />
+                <span>اعدادات</span>
+              </NavLink>
+            </button>
             <div className="flex justify-center items-end p-0 grow  ">
               <button
                 className="flex justify-end items-center  loguot"

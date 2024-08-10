@@ -8,7 +8,7 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import { createContext, useState } from "react";
 import EmpRequest from "./components/empRequest/EmpRequest";
 import { motion } from "framer-motion";
-import { React , useContext,useEffect } from "react";
+import { React, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ShowTeachReq from "./components/TableShow/ShowTeachReq";
 import ShowEmp from "./components/TableShow/ShowEmp";
@@ -17,13 +17,8 @@ import { StudentsTable } from "./components/student/StudentsTable";
 import { PopUp } from "./App";
 import axios from "axios";
 
-
-
 function Home2() {
-
-  const { click ,tclick , setclick} = useContext(PopUp);
-
-
+  const { click, tclick, setclick } = useContext(PopUp);
 
   const navigate = useNavigate();
 
@@ -37,7 +32,7 @@ function Home2() {
         <div className="flex flex-col  items-center lg:flex-row gap-3 justify-around flex-wrap py-10 mt-11 mx-auto ">
           <div
             className="homeBtn relative cursor-pointer"
-            onClick={() => setclick([0, 0, 0, 0, 0, 0,1])}
+            onClick={() => setclick([0, 0, 0, 0, 0, 0, 1])}
           >
             <div className="absolute px-9 py-6 -top-4 -left-5 border border-gray-300 rounded-[20px] bg-white shadow ">
               <CiCirclePlus size={25} color="gray" />
@@ -51,7 +46,7 @@ function Home2() {
           </div>
           <div
             className="homeBtn relative cursor-pointer"
-            onClick={() => setclick([0, 0, 0, 0,0,0,0,0,1])}
+            onClick={() => setclick([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1])}
           >
             <div className="absolute px-9 py-6 -top-4 -left-5 border border-gray-300 rounded-[20px] bg-white shadow">
               <CiCirclePlus size={25} color="gray" />
@@ -79,8 +74,8 @@ function Home2() {
           {/* </div> */}
         </div>
 
-      <StudentsTable/>
-    </div>
+        <StudentsTable />
+      </div>
     </div>
   );
 }

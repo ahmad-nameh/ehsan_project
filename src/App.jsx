@@ -25,6 +25,7 @@ import ShowJoinToSystemRequest from "./components/TableShow/ShowJoinToSystemRequ
 import PopupWindow from "./components/student/popup/PopupWindow";
 import Event from "./components/student/Event";
 import Complaint from "./components/student/Complaint";
+import Setting from "./components/student/Setting";
 
 const PrivateRoute = ({ element: Component, ...rest }) => {
   // const isAuthenticated = localStorage.getItem("token");
@@ -36,12 +37,13 @@ const PrivateRoute = ({ element: Component, ...rest }) => {
 export const PopUp = createContext(null);
 
 const App = () => {
+  const [reload, setReload] = useState(0);
   const [click, setclick] = useState([0, 0, 0, 0, 0]);
   const [tClick, setTClick] = useState([1, 0, 0, 0, 0]);
   console.log(click);
   return (
     <div>
-      <PopUp.Provider value={{ click, setTClick, setclick }}>
+      <PopUp.Provider value={{ click, setTClick, setclick, reload, setReload }}>
         <BrowserRouter>
           <NavBar />
           <Routes>
@@ -75,6 +77,10 @@ const App = () => {
               path="/complaint"
               element={<PrivateRoute element={Complaint} />}
             />
+            <Route
+              path="/setting"
+              element={<PrivateRoute element={Setting} />}
+            />
             <Route path="/login" element={<Login />} />
           </Routes>
         </BrowserRouter>
@@ -87,6 +93,10 @@ const App = () => {
         ) : click[7] ? (
           <PopupWindow name="addEvent" />
         ) : click[8] ? (
+          <PopupWindow name="addAdminForClass" />
+        ) : click[9] ? (
+          <PopupWindow name="AddClass" />
+        ) : click[10] ? (
           <PopupWindow name="addGrade" />
         ) : // <PopupWindow name="addFile"/>
         null}
