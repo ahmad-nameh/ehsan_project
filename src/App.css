@@ -50,9 +50,8 @@ select {
   @apply flex justify-between border border-gray-400 rounded-md p-2 m-2;
 }
 
-
 .loader {
-  border: 16px solid #f3f3f3; 
+  border: 16px solid #f3f3f3;
   border-top: 16px solid var(--color6);
   border-radius: 50%;
   width: 120px;
@@ -61,6 +60,10 @@ select {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
