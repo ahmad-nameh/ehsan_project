@@ -101,11 +101,12 @@ export const AddStu =() => {
                     <input type="tel" placeholder="09......" className="w-full" required name="mobile_num" pattern="[1-9]+" onChange={handleInputChange}/><br/>
                     <div className="basis-2/5">
                         <label>الصف</label><br/>
-                        {classes[0]&&<select className="text-green-300" name="class_id" onChange={handleInputChange} >
-                            {classes.map((item, index) => (
+                        <select className="w-40" name="class_id" onChange={handleInputChange} >
+                            <option value="">اختر</option>
+                            {classes[0]&&classes.map((item, index) => (
                                 <option key={index} value={item._id}>{item.name} {item.section}</option>
                             ))}
-                        </select>}
+                        </select>
                     </div>
                     <label>العنوان</label><br/>
                     <textarea  className="w-full" placeholder="العنوان بالتفصيل" required name="address" onChange={handleInputChange} ></textarea>

@@ -1,19 +1,17 @@
 import { React ,useState ,useEffect ,useContext } from "react";
 import EditIcon from '@mui/icons-material/Edit';
 import ClearIcon from '@mui/icons-material/Clear';
-import ResponsiveDateTimePickers from "../Date/DateTimePic";
-import DatePiker from "../Date/DatePiker";
+import ResponsiveDateTimePickers from "../../Date/DateTimePic";
 import axios from "axios";
-import { PopUp } from "../../App";
+import { PopUp } from "../../../App";
 
-export const ExamSchedule =(props) => {
+export const WeekSchedule =(props) => {
 
     const { click ,tclick , setclick} = useContext(PopUp);
     const [data , setData] = useState({});
     const [formData,setFormData] = useState({});
     const [error , setError] = useState('')
-    const[date,setDate] = useState()
-    const[time,settime] = useState()
+    const[day,setDay] = useState('الاحد')
     const[period,setperiod] = useState(1)
     const[changeDay,setChangeDay] = useState(true);
     const apiUrl = process.env.REACT_APP_API_URL;
@@ -26,10 +24,11 @@ export const ExamSchedule =(props) => {
         
         try {
             console.log("a")
-            // console.log(day)
+            console.log(day)
         const response = await axios.post(
-            `${apiUrl}/showExamSchedule`,{
+            `${apiUrl}/showWeekSchedule`,{
                 class_id :"66ad42c654ed758ed6e2420b",
+                day :day
             },
             {
             headers: {
@@ -41,7 +40,6 @@ export const ExamSchedule =(props) => {
         if(response.data.status) {
         // setclick([0])
         console.log(response)
-        console.log("alo")
         setData(response.data.data)
         }
         
@@ -82,7 +80,7 @@ export const ExamSchedule =(props) => {
     console.log(formData)
     console.log(data)
 
-    // console.log(day)
+    console.log(day)
     const handleAddToProgram = async(e) => {
         e.preventDefault();
         setFormData({
@@ -120,26 +118,41 @@ export const ExamSchedule =(props) => {
     }
     }
     console.log(formData)
-    console.log(date)
-    console.log(time)
     return(
         <div >
-            <h2 className="text-l text-center mt-6">برنامج الامتحان</h2>
+            <h2 className="text-l text-center mt-6">برنامج الاسبوع</h2>
+            <ul className="flex gap-2  w-fit my-5 mx-auto  rounded-full text-white bg-cyan-600" >
+                <li><button className="px-2 py-2 rounded-full duration-500 bg-cyan-800" onClick={setProgDay}>الاحد</button></li>
+                <li><button className="px-2 py-2 rounded-full duration-500" onClick={setProgDay}>الاثنين</button></li>
+                <li><button className="px-2 py-2 rounded-full duration-500" onClick={setProgDay}>الثلاثاء</button></li>
+                <li><button className="px-2 py-2 rounded-full duration-500" onClick={setProgDay}>الاربعاء</button></li>
+                <li><button className="px-2 py-2 rounded-full duration-500" onClick={setProgDay}>الخميس</button></li>
+            </ul>
             <div className="flex max-h-[90vh] overflow-auto flex bg-white p-12 text-[13px] justify-between addClassmate gap-4">
             <div className="basis-1/3 " style={{direction:"rtl"}}>
                 <form onSubmit={handleAddToProgram}>
                 <label>المادة</label><br/>
                 <input type="text" placeholder="الحصة الدرسية" className="w-full" name="name" required onChange={handleInputChange}/><br/>
-                <label>التاريخ</label><br/>
-                <DatePiker datee={date} setDate={setDate}/>
-                
-                <label>الوقت</label>
-                <ResponsiveDateTimePickers time={time} setTime={settime}/>
+                <label>الحصة</label><br/>
+                <ul className="flex gap-2 lessons">
+                    <li className="text-white bg-sky-400 bg-sky-700 p-2 rounded-xl cursor-pointer" onClick={setPeriod}>1</li>
+                    <li className="text-white bg-sky-400 p-2 rounded-xl cursor-pointer" onClick={setPeriod}>2</li>
+                    <li className="text-white bg-sky-400 p-2 rounded-xl cursor-pointer" onClick={setPeriod}>3</li>
+                    <li className="text-white bg-sky-400 p-2 rounded-xl cursor-pointer" onClick={setPeriod}>4</li>
+                    <li className="text-white bg-sky-400 p-2 rounded-xl cursor-pointer" onClick={setPeriod}>5</li>
+                    <li className="text-white bg-sky-400 p-2 rounded-xl cursor-pointer" onClick={setPeriod}>6</li>
+                    <li className="text-white bg-sky-400 p-2 rounded-xl cursor-pointer" onClick={setPeriod}>7</li>
+                    <li className="text-white bg-sky-400 p-2 rounded-xl cursor-pointer" onClick={setPeriod}>8</li>
+                </ul>
+                <label>الاستاذ</label><br/>
+                <input type="text" className="w-full" name="teacher" required placeholder="المدرس" value={formData.teacher} onChange={handleInputChange}/><br/>
+                {/* <label>الوقت والتاريخ</label>
+                <ResponsiveDateTimePickers/> */}
 
                 <button className="adding mx-auto" onClick={(e)=>handleAddToProgram}>إضافة</button>
                 </form>
             </div>
-            {/* {data[0]&&
+            {data[0]&&
             <div className="flex basis-2/3 justify-around flex-wrap">
                 {data.map((item,index) => (
                 <div className="bg-white p-3 rounded-xl basis-60 border-2 border-slate-100 h-28 relative classmate w-40" key={index} >
@@ -155,7 +168,7 @@ export const ExamSchedule =(props) => {
                 ))}
         
                 
-            </div>} */}
+            </div>}
         </div>
         {/* <button style={{padding: "10px 20px",color:"white",backgroundColor:"green",borderRadius:"12px",display:"block",margin: "-15px  auto 10px"}}>حفظ</button> */}
         </div>

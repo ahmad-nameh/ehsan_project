@@ -98,6 +98,11 @@ form.Deta input.editable {
     background-color: black;
     margin-top: 2px;
 }
+.classmate .css-i4bv87-MuiSvgIcon-root.clock {
+    background-color: transparent;
+    color: rgb(107 114 128);
+    font-size: 25px;
+}
 
 .pdo {
     width: calc(100% - 78px);

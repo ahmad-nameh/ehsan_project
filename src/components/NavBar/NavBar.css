@@ -23,6 +23,9 @@
     width: 100%;
   }
 }
+.nav button {
+  width: 100%;
+}
 .nav a {
   /* font-weight: bold; */
   width: 100%;

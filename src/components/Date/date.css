@@ -12,6 +12,11 @@
 .css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
     direction: rtl;
 }
-.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+.examschedule .css-1d3z3hw-MuiOutlinedInput-notchedOutline {
     border: 0 !important;
+
+}
+
+.css-1eurbeq-MuiPickersToolbar-root-MuiDatePickerToolbar-root {
+    padding: 0 !important;
 }

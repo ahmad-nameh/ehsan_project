@@ -37,7 +37,6 @@ export default function TableEmp() {
   };
 
   return (
-    data[0] && (
       <div className="tableEmp bg-white border shadow rounded-[7px] p-10 mx-9">
         <div className="header grid grid-cols-8  py-4 font-bold">
           <h2>الاسم</h2>
@@ -49,6 +48,7 @@ export default function TableEmp() {
           <h2>عنوان السكن</h2>
           <h2>الهاتف</h2>
         </div>
+        {data[0]&&<div>
         {data.map((i, ii) => (
           <div
             key={i._id}
@@ -65,7 +65,7 @@ export default function TableEmp() {
             <h2>{i.mobile_num}</h2>
           </div>
         ))}
+        </div>}
       </div>
     )
-  );
 }
