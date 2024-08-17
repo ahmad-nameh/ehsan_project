@@ -17,7 +17,7 @@ import StudentInfo from "./components/student/StudentDetailsPage/StudentInfo";
 
 import ShowJoinToSystemRequest from "./components/TableShow/ShowJoinToSystemRequest ";
 import PopupWindow from "./components/student/popup/PopupWindow";
-import Event from "./components/Event/Event"
+import Event from "./components/Event/Event";
 import Complaint from "./components/student/Complaint";
 import Setting from "./components/student/Setting";
 
@@ -27,13 +27,11 @@ const PrivateRoute = ({ element: Component, ...rest }) => {
   const isAuthenticated = localStorage.getItem("token");
 
   return isAuthenticated ? <Component /> : <Navigate to="/login" />;
-
 };
 
 export const PopUp = createContext(null);
 
 const App = () => {
-
   const [reload, setReload] = useState(0);
   const [click, setclick] = useState([0, 0, 0, 0, 0]);
   const [tClick, setTClick] = useState([1, 0, 0, 0, 0]);
@@ -43,11 +41,12 @@ const App = () => {
         <BrowserRouter>
           <NavBar />
           <Routes>
-            <Route path="/" element={<PrivateRoute element={Home} />} />
-            <Route
-              path="/student"
-              element={<PrivateRoute element={Home2} />}
-            />
+            {localStorage.getItem("role") === "موجه" ? (
+              <Route path="/" element={<PrivateRoute element={Home2} />} />
+            ) : (
+              <Route path="/" element={<PrivateRoute element={Home} />} />
+            )}
+
             <Route
               path="/archive"
               element={<PrivateRoute element={MainInfoArchive} />}
@@ -102,18 +101,17 @@ const App = () => {
           <PopupWindow name="AddClass" />
         ) : click[10] ? (
           <PopupWindow name="addGrade" />
-        ): click[11] ? (
+        ) : click[11] ? (
           <PopupWindow name="addFile" />
         ) : click[12] ? (
           <PopupWindow name="weeklySchedule" />
-        ): click[13] ? (
+        ) : click[13] ? (
           <PopupWindow name="examSchedule" />
-        ): click[14] ? (
+        ) : click[14] ? (
           <PopupWindow name="studentAbsense" type="adding" />
-        ): click[15] ? (
+        ) : click[15] ? (
           <PopupWindow name="studentAbsense" />
-        )
-        :null}
+        ) : null}
       </PopUp.Provider>
     </div>
   );
