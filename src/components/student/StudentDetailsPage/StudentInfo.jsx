@@ -1,0 +1,97 @@
+import { React , useState , useEffect ,useContext} from "react";
+import { useLocation } from "react-router-dom";
+import PersonOffIcon from '@mui/icons-material/PersonOff';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import BasicArea from "./Chart";
+import StudentDetails from "./StudentDetails";
+import RemoveIcon from '@mui/icons-material/Remove';
+import StudentGrade from "./StudentGrade";
+import axios from "axios";
+import { PopUp } from "../../../App";
+const StudentInfo = () => {
+
+    const location = useLocation();
+
+    const { click ,tclick , setclick} = useContext(PopUp);
+    const [data , setData] = useState({});
+    const [error , setError] = useState('')
+
+    const apiUrl = process.env.REACT_APP_API_URL;
+
+    const token = localStorage.getItem("token")
+
+    useEffect(()=>{
+        const getData = async () => {
+        setclick([0,0,0,0,0,1])
+        try {
+        const response = await axios.post(
+            `${apiUrl}/showStudentInfo`, {id:location.state.studentId},
+            {
+            headers: {
+                Accept: "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+            }
+        );
+        if(response.data.status) {
+            setclick([0])
+            console.log(response)
+            setData(response.data)
+        }
+        
+        }
+        catch(e){
+            setclick([0])
+            setError(e.message)
+            console.log(e)
+        }
+    }
+    getData();
+    },[])
+
+    console.log(data)
+
+
+    return(
+        <div>
+            {data&&data.absence&&data.delay&&data.violation&&<div className="container flex justify-between flex-wrap mt-12 px-10 mb-10">
+                <div className=" basis-8/12">
+                    <div className="flex justify-center" style={{gap:100}}>
+                        <div className="flex items-center gap-10 relative border border-gray-300 rounded-[20px] bg-white shadow p-5">
+                            <div className="flex items-center gap-5">
+                                <p className="text-x as">المخالفات<br/>{data.violation&&(data.violation.length)}</p>
+                                <RemoveIcon className="icon text-5xl rounded-full"/>
+                            </div>
+                            <button>تفاصيل</button>
+                            {/* <button style={{color:"#00000078"}}> */}
+                                <AddCircleOutlineIcon className="absolute text-x" style={{bottom: -10,left:-10}} 
+                            />
+                            {/* </button> */}
+                        </div>
+                        <div className="flex items-center gap-10 relative border border-gray-300 rounded-[20px] bg-white shadow p-5">
+                            <div className="flex items-center gap-5">
+                                <p className="text-x as">الغيابات<br/>{data.absence&&(data.absence.length + data.delay.length)}</p>
+                                <PersonOffIcon className="icon text-5xl  rounded-full"/>
+                            </div>
+                            <button onClick={()=>setclick([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1])}>تفاصيل</button>
+                            <AddCircleOutlineIcon className="absolute text-x" style={{bottom: -10,left:-10}}
+                            onClick={()=>setclick([0,0,0,0,0,0,0,0,0,0,0,0,0,0,1])}/>
+                        </div>
+                    </div>
+                    {/* //charts */}
+                    <div className="basis-1/2">
+                        {/* <BarsDataset className="basis-1/2"/> */}
+                        <BasicArea data={data}/>
+                    </div>
+                    <StudentGrade data={data.exam}/>
+                </div>
+                {/* <div className="basis-1/4"> */}
+
+                <StudentDetails data={data.student}/>
+                {/* </div> */}
+            </div>}
+        </div>
+    )
+}
+
+export default StudentInfo;

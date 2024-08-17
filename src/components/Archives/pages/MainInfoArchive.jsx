@@ -40,6 +40,7 @@ const MainInfoArchive = () => {
     if (location.state && location.state.empid !== null) {
       setEmpId(location.state.empid);
       const fetchData = async () => {
+        setclick([0,0,0,0,0,1])
         try {
           const response = await axios.get(
             `${apiUrl}showEmpData/${location.state.empid}`,
@@ -50,6 +51,9 @@ const MainInfoArchive = () => {
               },
             }
           );
+          if(response.data.status) {
+            setclick([0])
+          }
           console.log(response);
           setAlldata(response.data);
           setFormData(response.data.data[0]);

@@ -8,6 +8,9 @@ import GroupRoundedIcon from "@mui/icons-material/GroupRounded";
 import DescriptionRoundedIcon from "@mui/icons-material/DescriptionRounded";
 import EventIcon from "@mui/icons-material/Event";
 import LogoutIcon from "@mui/icons-material/Logout";
+import BadgeIcon from "@mui/icons-material/Badge";
+import AutoStoriesIcon from "@mui/icons-material/AutoStories";
+import MessageIcon from "@mui/icons-material/Message";
 import axios from "axios";
 
 const NavBar = () => {
@@ -61,13 +64,13 @@ const NavBar = () => {
             <img src={Logo} alt="logo" className="Logo" />
             <button className="flex items-center">
               <NavLink to="/" className="px-0 mx-0 flex items-center ">
-                <HomeRoundedIcon />
+                <BadgeIcon />
                 <span> الموظفين</span>
               </NavLink>
             </button>
             <button className="flex items-center">
-              <NavLink to="/b" className="flex items-center ">
-                <GroupRoundedIcon />
+              <NavLink to="/student" className="flex items-center ">
+                <AutoStoriesIcon />
                 <span>الطلاب</span>
               </NavLink>
             </button>
@@ -85,14 +88,14 @@ const NavBar = () => {
             </button>
             <button className="flex items-center">
               <NavLink to="/complaint" className="flex items-center ">
-                <DescriptionRoundedIcon />
+                <MessageIcon />
                 <span>المقترحات</span>
               </NavLink>
             </button>
             <button className="flex items-center">
               <NavLink to="/setting" className="flex items-center ">
                 <DescriptionRoundedIcon />
-                <span>اعدادات</span>
+                <span>إعداد</span>
               </NavLink>
             </button>
             <div className="flex justify-center items-end p-0 grow  ">
@@ -111,19 +114,7 @@ const NavBar = () => {
             <button className="flex items-center">
               <NavLink to="/" className="px-0 mx-0 flex items-center ">
                 <HomeRoundedIcon />
-                <span> الموظفين</span>
-              </NavLink>
-            </button>
-            <button className="flex items-center">
-              <NavLink to="/b" className="flex items-center ">
-                <GroupRoundedIcon />
-                <span>الطلاب</span>
-              </NavLink>
-            </button>
-            <button className="flex items-center">
-              <NavLink to="/join" className="flex items-center ">
-                <GroupRoundedIcon />
-                <span>الانضمام</span>
+                <span>الرئيسية</span>
               </NavLink>
             </button>
             <button className="flex items-center">
@@ -134,7 +125,7 @@ const NavBar = () => {
             </button>
             <button className="flex items-center">
               <NavLink to="/complaint" className="flex items-center ">
-                <DescriptionRoundedIcon />
+                <MessageIcon />
                 <span>المقترحات</span>
               </NavLink>
             </button>
@@ -154,19 +145,7 @@ const NavBar = () => {
             <button className="flex items-center">
               <NavLink to="/" className="px-0 mx-0 flex items-center ">
                 <HomeRoundedIcon />
-                <span> الموظفين</span>
-              </NavLink>
-            </button>
-            <button className="flex items-center">
-              <NavLink to="/b" className="flex items-center ">
-                <GroupRoundedIcon />
-                <span>الطلاب</span>
-              </NavLink>
-            </button>
-            <button className="flex items-center">
-              <NavLink to="/join" className="flex items-center ">
-                <GroupRoundedIcon />
-                <span>الانضمام</span>
+                <span> الرئيسية</span>
               </NavLink>
             </button>
             <button className="flex items-center">
@@ -177,7 +156,7 @@ const NavBar = () => {
             </button>
             <button className="flex items-center">
               <NavLink to="/complaint" className="flex items-center ">
-                <DescriptionRoundedIcon />
+                <MessageIcon />
                 <span>المقترحات</span>
               </NavLink>
             </button>

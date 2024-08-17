@@ -61,7 +61,7 @@ const Complaint = () => {
             </div>
             <div
               className="overflow-auto  border-b-2"
-              style={{ maxHeight: "75vh" }}
+              style={{ maxHeight: "65vh" }}
             >
               {data.map((item, index) => (
                 <div

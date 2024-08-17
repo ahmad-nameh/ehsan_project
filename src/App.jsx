@@ -11,27 +11,22 @@ import Home from "./Home";
 import ShowInfo from "./components/TableShow/ShowInfo";
 import ShowInfo2 from "./components/TableShow/ShowInfo2";
 import { createContext, useState } from "react";
-import { motion } from "framer-motion";
-import { IoIosCloseCircleOutline } from "react-icons/io";
-import StudentInfo from "./components/student/StudentInfo";
-import { AddStu } from "./components/student/AddStu";
-import StudentGrade from "./components/student/StudentGrade";
-import ResponsiveDatePickers from "./components/Date/DatePikerOpened";
-import { AddEvent } from "./components/student/AddEvent";
-import { AddGrade } from "./components/student/AddGrade";
 import Home2 from "./Home2";
-import { Prog } from "./components/student/WProgram";
+
+import StudentInfo from "./components/student/StudentDetailsPage/StudentInfo";
+
 import ShowJoinToSystemRequest from "./components/TableShow/ShowJoinToSystemRequest ";
 import PopupWindow from "./components/student/popup/PopupWindow";
-import Event from "./components/student/Event";
+import Event from "./components/Event/Event";
 import Complaint from "./components/student/Complaint";
 import Setting from "./components/student/Setting";
 
-const PrivateRoute = ({ element: Component, ...rest }) => {
-  // const isAuthenticated = localStorage.getItem("token");
+import { StudentAbsense } from "./components/student/StudentDetailsPage/StudentAbsense";
 
-  // return isAuthenticated ? <Component /> : <Navigate to="/login" />;
-  return <Component />;
+const PrivateRoute = ({ element: Component, ...rest }) => {
+  const isAuthenticated = localStorage.getItem("token");
+
+  return isAuthenticated ? <Component /> : <Navigate to="/login" />;
 };
 
 export const PopUp = createContext(null);
@@ -40,14 +35,18 @@ const App = () => {
   const [reload, setReload] = useState(0);
   const [click, setclick] = useState([0, 0, 0, 0, 0]);
   const [tClick, setTClick] = useState([1, 0, 0, 0, 0]);
-  console.log(click);
   return (
     <div>
       <PopUp.Provider value={{ click, setTClick, setclick, reload, setReload }}>
         <BrowserRouter>
           <NavBar />
           <Routes>
-            <Route path="/" element={<PrivateRoute element={Home2} />} />
+            {localStorage.getItem("role") === "موجه" ? (
+              <Route path="/" element={<PrivateRoute element={Home2} />} />
+            ) : (
+              <Route path="/" element={<PrivateRoute element={Home} />} />
+            )}
+
             <Route
               path="/archive"
               element={<PrivateRoute element={MainInfoArchive} />}
@@ -71,6 +70,10 @@ const App = () => {
             <Route
               path="/join"
               element={<PrivateRoute element={ShowJoinToSystemRequest} />}
+            />
+            <Route
+              path="/studentInfo"
+              element={<PrivateRoute element={StudentInfo} />}
             />
             <Route path="/event" element={<PrivateRoute element={Event} />} />
             <Route
@@ -98,8 +101,17 @@ const App = () => {
           <PopupWindow name="AddClass" />
         ) : click[10] ? (
           <PopupWindow name="addGrade" />
-        ) : // <PopupWindow name="addFile"/>
-        null}
+        ) : click[11] ? (
+          <PopupWindow name="addFile" />
+        ) : click[12] ? (
+          <PopupWindow name="weeklySchedule" />
+        ) : click[13] ? (
+          <PopupWindow name="examSchedule" />
+        ) : click[14] ? (
+          <PopupWindow name="studentAbsense" type="adding" />
+        ) : click[15] ? (
+          <PopupWindow name="studentAbsense" />
+        ) : null}
       </PopUp.Provider>
     </div>
   );

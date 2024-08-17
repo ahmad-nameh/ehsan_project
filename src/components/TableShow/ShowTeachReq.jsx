@@ -58,7 +58,7 @@ export default function ShowTeachReq() {
             <h2>{i.name}</h2>
             <h2>{i.academic_qualification}</h2>
             <h2>{i.issuing_authority}</h2>
-            {/* <h2>{i.social_status_id}</h2> */}
+            <h2>{i.social_status_id.name}</h2>
             <h2>{i.birth_city}</h2>
             <h2>{date(i.birth_date)}</h2>
             <h2>{i.address}</h2>

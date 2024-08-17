@@ -3,35 +3,44 @@ import dayjs from 'dayjs';
 import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
-import { DesktopDateTimePicker } from '@mui/x-date-pickers/DesktopDateTimePicker';
-import { StaticDateTimePicker } from '@mui/x-date-pickers/StaticDateTimePicker';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
+import { DesktopTimePicker } from '@mui/x-date-pickers/DesktopTimePicker';
+import { StaticTimePicker } from '@mui/x-date-pickers/StaticTimePicker';
 
-export default function ResponsiveDateTimePickers() {
+export default function ResponsiveTimePickers({time , setTime}) {
+
+  const handleChangeTime =(e) => {
+    console.log(e)
+    let time1 = new Date(e);
+    console.log(time1.getHours())
+    console.log(time1.getMinutes())
+    setTime(`${time1.getHours()}:${time1.getMinutes()}`)
+  }
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      {/* <DemoContainer
+      <DemoContainer
         components={[
-          'DateTimePicker',
-          'MobileDateTimePicker',
-          'DesktopDateTimePicker',
-          'StaticDateTimePicker',
+          'TimePicker',
+          'MobileTimePicker',
+          'DesktopTimePicker',
+          'StaticTimePicker',
         ]}
-      > */}
+      >
         {/* <DemoItem label="Desktop variant">
-          <DesktopDateTimePicker defaultValue={dayjs('2022-04-17T15:30')} />
+          <DesktopTimePicker defaultValue={dayjs('2022-04-17T15:30')} />
         </DemoItem> */}
         <DemoItem >
-          <MobileDateTimePicker defaultValue={dayjs('2022-04-17T15:30')} />
-    </DemoItem>
-         {/* <DemoItem label="Responsive variant">
-           <DateTimePicker defaultValue={dayjs('2022-04-17T15:30')} />
-         </DemoItem>  */}
-        {/* <DemoItem label="Static variant">
-          <StaticDateTimePicker defaultValue={dayjs('2022-04-17T15:30')} />
+          <MobileTimePicker onChange={handleChangeTime} />
+        </DemoItem>
+        {/* <DemoItem label="Responsive variant">
+          <TimePicker defaultValue={dayjs('2022-04-17T15:30')} />
+        </DemoItem>
+        <DemoItem label="Static variant">
+          <StaticTimePicker defaultValue={dayjs('2022-04-17T15:30')} />
         </DemoItem> */}
-      {/* </DemoContainer> */}
+      </DemoContainer>
     </LocalizationProvider>
   );
 }

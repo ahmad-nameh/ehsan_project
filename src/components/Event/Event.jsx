@@ -62,16 +62,14 @@ const Event = () => {
 
   return (
     <div className="container">
-      <div className="p=10 mt-7 lg:mr-32 ml-10">
-        <div className="flex justify-between items-center">
-          <h1 className=" font-bold text-xl my-10">الفعاليات</h1>
-          <button
-            onClick={() => setclick([0, 0, 0, 0, 0, 0, 0, 1])}
-            className="adding"
-          >
-            إضافة
-          </button>
-        </div>
+      <div className="p=10">
+        <h1 className="mt-6 mr-10 font-bold">الفعاليات</h1>
+        <button
+          onClick={() => setclick([0, 0, 0, 0, 0, 0, 0, 1])}
+          className="adding mr-auto"
+        >
+          إضافة
+        </button>
         {data[0] && (
           <div
             className="container  p-10 mx-9"
@@ -82,7 +80,7 @@ const Event = () => {
               padding: "0 20px",
             }}
           >
-            <div className="header grid grid-cols-custom-8 items-center py-4 text-sm font-bold border-b-2">
+            <div className="header grid grid-cols-custom-8 items-center py-4 font-bold border-b-2">
               <h2>اسم الفعالية</h2>
               <h2>التاريخ</h2>
               <h2>مكانها</h2>
@@ -101,12 +99,12 @@ const Event = () => {
                   className="header grid grid-cols-custom-8 items-center py-4"
                   key={index}
                 >
-                  <h2 className="font-bold text-sm">{item.name}</h2>
-                  <p className="text-sm">{item.date}</p>
-                  <p className="text-sm">{item.place}</p>
-                  <p className="text-sm">{item.description}</p>
-                  <p className="text-sm">{item.number_of_registrants}</p>
-                  <p className="font-bold text-sm">{item.admin_added.name}</p>
+                  <h2 className="font-bold">{item.name}</h2>
+                  <p>{item.date}</p>
+                  <p>{item.place}</p>
+                  <p>{item.description}</p>
+                  <p>{item.number_of_registrants}</p>
+                  <p>{item.admin_added.name}</p>
                   <div style={{ width: "100px" }}>
                     <img src={item.photo} />
                   </div>
