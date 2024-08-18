@@ -4,7 +4,8 @@ import axios from "axios";
 
 export const AddEvent =() => {
 
-    const { click ,tclick , setclick} = useContext(PopUp);
+    const { setReload , setclick} = useContext(PopUp);
+    // const { setReload, setclick } = useContext(PopUp);
 
     const apiUrl = process.env.REACT_APP_API_URL;
     const token = localStorage.getItem("token");
@@ -38,6 +39,7 @@ export const AddEvent =() => {
         console.log(response)
         if(response.data.status) {
             setclick([0,0,0,0,1]);
+            setReload((i) => i + 1);
             setMessage(response.data.message)
         }
         console.log(formDataToSend)
