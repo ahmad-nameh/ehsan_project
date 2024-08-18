@@ -1,198 +1,179 @@
 import { React, useState, useEffect, useContext } from "react";
 import { PopUp } from "../../App";
 import axios from "axios";
-import FileDownloadIcon from '@mui/icons-material/FileDownload';
-import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
+import FileDownloadIcon from "@mui/icons-material/FileDownload";
+import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 
-export const Addfile =() => {
+export const Addfile = () => {
+  const { click, tclick, setclick } = useContext(PopUp);
 
-    const { click ,tclick , setclick} = useContext(PopUp);
+  const apiUrl = process.env.REACT_APP_API_URL;
+  const token = localStorage.getItem("token");
 
-    const apiUrl = process.env.REACT_APP_API_URL;
-    const token = localStorage.getItem("token");
-    
-    const [formData,setFormData] = useState({});
-    const [data,setData] = useState({});
-    const [message,setMessage] = useState("");
-    const [error,setError] = useState("")
-    const [file , setFile] = useState(null)
-    const[classes,setClasses] = useState({});
-    const[class_id,setClass_id] = useState("");
-    const [subject,setSubject] = useState({});
+  const [data, setData] = useState({});
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+  const [file, setFile] = useState();
+  const [classes, setClasses] = useState({});
+  const [classes2, setClasses2] = useState([]);
+  const [class_id, setClass_id] = useState("");
+  const [subject, setSubject] = useState({});
+  const [subject2, setSubject2] = useState();
+  const [name, setName] = useState();
 
-    
-    useEffect(()=>{
-        const getData = async () => {
-        try {
-        const response = await axios.get(
-            `${apiUrl}/showClasses`,
-            {
-            headers: {
-                Accept: "application/json",
-                Authorization: `Bearer ${token}`,
-            },
-            }
-        );
-        console.log(response)
-        setClasses(response.data.data);
-        }
-        catch(e){
-        setError(e.message)
-        }
-    }
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/showClasses`, {
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        setClasses(response.data?.data);
+      } catch (e) {
+        setError(e.message);
+      }
+    };
     getData();
-    },[])
+  }, []);
 
-    useEffect(()=>{
-        const getData = async () => {
-        try {
+  useEffect(() => {
+    const getData = async () => {
+      try {
         const response = await axios.post(
-            `${apiUrl}/showStudentsAndSubjectForClass`,{class_id:class_id},
-            {
+          `${apiUrl}showStudentsAndSubjectForClass`,
+          { class_id: class_id },
+          {
             headers: {
-                Accept: "application/json",
-                Authorization: `Bearer ${token}`,
+              Accept: "application/json",
+              Authorization: `Bearer ${token}`,
             },
-            }
+          }
         );
-        console.log(response)
-        // console.log(response1)
-        setSubject(response.data.subject)
-
-        }
-        catch(e){
-            console.log(e)
-        setError(e.message)
-        }
-    }
-    getData();
-    },[class_id])
-
-    useEffect(()=>{
-        const getData = async () => {
-            // setclick([0,0,0,0,0,1])
-        try {
-        const response = await axios.get(
-            `${apiUrl}/showFiles`,
-            {
-            headers: {
-                Accept: "application/json",
-                Authorization: `Bearer ${token}`,
-            },
-            }
-        );
-        if(response.data.status) {
-            // setclick([0])
-            console.log(response)
-            setData(response.data.data)
-            }
-        
-        }
-        catch(e){
-        setError(e.message)
-        console.log(e)
-        }
-    }
-    getData();
-    },[])
-    console.log(data)
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const formDataToSend = new FormData();
-        formDataToSend.append("file", file); 
-    
-        formDataToSend.append("class_id[0]", class_id); 
-    
-        // Appending other form data
-        for (const key in formData) {
-            formDataToSend.append(key, formData[key]);
-        }
-    
-        try {
-            const response = await axios.post(
-                `${apiUrl}/addFile`,
-                formDataToSend,
-                {
-                    headers: {
-                        Accept: "application/json",
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
-            if(response.data.status) {
-                setMessage(response.data.message);
-            }
-        } catch(e) {
-            console.log(e);
-        }
+        response;
+        //  (response1)
+        setSubject(response.data.subject);
+      } catch (e) {
+        e;
+        setError(e.message);
+      }
     };
-    
-    const handleInputChange = (event) => {
-        if(event.target.name === "file") {
-            console.log("aa")
-            setFile(event.target.files[0]);
-        } else {
-            setFormData({
-                ...formData,
-                [event.target.name]: event.target.value,
-            });
-        }
-    };
-    
-console.log(file)
-    console.log(formData)
+    getData();
+  }, [class_id]);
 
-    return(
-        <div>
-            <div>
-                <h2 className="text-center text-l mt-6">إضافة ملف</h2>
-                <div className="max-h-[90vh] overflow-auto bg-white pt-12 px-12 pb-6 text-[13px] addstu flex gap-8">
-                    
-                        {/* <div> */}
-                        <form onSubmit={handleSubmit} className="basis-1/3">
-                            <label>اسم الملف</label><br/>
-                            <input type="text" placeholder="اسم الملف" className="w-full" name="name" required onChange={handleInputChange} /><br/>
-                            <label>الصف</label><br/>
-                            <select className="w-40" name="class_id" onChange={(e)=>setClass_id(e.target.value)} >
-                                <option value="">اختر</option>
-                                {classes[0]&&classes.map((item, index) => (
-                                    <option key={index} value={item._id}>{item.name} {item.section}</option>
-                                ))}
-                            </select>
-                            <label>المادة</label><br/>
-                            <select className="w-40" name="subject_id" onChange={handleInputChange}>
-                                <option value="">اختر</option>
-                                {subject[0]&&subject.map((item,index)=>(
-                                    <option key={index} value={item._id}>{item.name}</option>
-                                ))}
-                            </select>
-                            <label>الملف</label><br/>
-                            <input type="file" className="w-full" name="file" onChange={handleInputChange}/><br/>
-                            <button onClick={(e)=>handleSubmit} className="adding mx-auto mt-7">إضافة</button>
-                        </form>
-                        {/* </div> */}
-                        {data[0]&&<div className="basis-2/3 justify-between border-r-2 p-2" style={{direction:"ltr"}}>
-                            {data.map((item,index) => (
-                                <div className="flex justify-between items-center p-4 border-b">
-                                <h2><InsertDriveFileIcon/>{item.name}</h2>
-                                <h2>{item.subject_id.name}</h2>
-                                <h2>
-                                {item.classes_id.map((item1,index1)=>(
-                                    <h2>{item1.name} {item1.section}</h2>
-                                ))}
-                                </h2>
-                                
-                                <h2></h2>
-                                <a href={item.url}><FileDownloadIcon/></a>
-                            </div>
-                            ))}
-                            
-                        </div>}
-                        
-                </div>
-            </div>
+  const handelClass = (e) => {
+    setClasses2((i) => [...i, e.target.value]);
+    const classesId = classes.filter((s) => s.name === e.target.value)[0];
+    setClass_id(classesId);
+  };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const classesId = classes2.map(
+      (i) => classes.filter((s) => s.name === i)[0]
+    );
+    classesId.map((i) => i._id);
+
+    const formDataToSend = new FormData();
+    Promise.all(
+      formDataToSend.append("file", file),
+      formDataToSend.append("name", name),
+      formDataToSend.append("subject_id", subject2)
+    );
+    classesId.map((i, ii) => {
+      formDataToSend.append(`classes_id[${ii}]`, i._id);
+    });
+
+    formDataToSend;
+
+    try {
+      setclick([0, 0, 0, 0, 0, 1]);
+      const response = await axios.post(`${apiUrl}addFile`, formDataToSend, {
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.status === 200) {
+        setclick([0, 0, 0, 0, 1]);
+        setMessage(response.data.message);
+      }
+    } catch (e) {
+      e;
+    }
+  };
+
+  return (
+    <div>
+      <div>
+        <h2 className="text-center text-l mt-6">إضافة ملف</h2>
+        <div className="max-h-[90vh] overflow-auto bg-white pt-12 px-12 pb-6 text-[13px] addstu  ">
+          <div className="flex justify-center">
+            <form onSubmit={handleSubmit} className="w-2/3 flex flex-col gap-5">
+              <div>
+                <label>اسم الملف</label>
+                <input
+                  type="text"
+                  placeholder="اسم الملف"
+                  className="w-full"
+                  name="name"
+                  required
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+              <div>
+                <label>الصف</label>
+                <select className="w-full" onChange={handelClass}>
+                  <option value="">اختر</option>
+                  {classes[0] &&
+                    [...new Set(classes.map((i) => i.name))].map(
+                      (item, index) => (
+                        <option key={index} value={item}>
+                          {item}
+                        </option>
+                      )
+                    )}
+                </select>
+              </div>
+              <div>
+                {classes2[0] &&
+                  classes2.map((i) => <span className="p-2">{i}</span>)}
+              </div>
+              <div>
+                <label>المادة</label>
+                <select
+                  className="w-full"
+                  name="subject_id"
+                  onChange={(e) => setSubject2(e.target.value)}
+                >
+                  <option value="">اختر</option>
+                  {subject[0] &&
+                    subject.map((item, index) => (
+                      <option key={index} value={item._id}>
+                        {item.name}
+                      </option>
+                    ))}
+                </select>
+              </div>
+              <div>
+                <label>اختر ملف</label>
+                <input
+                  type="file"
+                  className="w-full"
+                  name="file"
+                  onChange={(e) => setFile(e.target.files[0])}
+                />
+
+                <button className="adding mx-auto mt-7" type="submit">
+                  إضافة
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-    )
-}
+      </div>
+    </div>
+  );
+};

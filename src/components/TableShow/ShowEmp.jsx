@@ -32,7 +32,7 @@ const ShowEmp = () => {
           if (error.response.data.status === 0) {
             setdata([]);
           }
-          console.log(error);
+          error;
         }
       };
       fetchData();
@@ -47,7 +47,7 @@ const ShowEmp = () => {
           });
           setdata(response.data.data);
         } catch (error) {
-          console.log(error);
+          error;
         }
       };
       fetchData();

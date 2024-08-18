@@ -1,37 +1,35 @@
-import * as React from 'react';
-import dayjs from 'dayjs';
-import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
-import { DesktopTimePicker } from '@mui/x-date-pickers/DesktopTimePicker';
-import { StaticTimePicker } from '@mui/x-date-pickers/StaticTimePicker';
+import * as React from "react";
+import dayjs from "dayjs";
+import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
+import { MobileTimePicker } from "@mui/x-date-pickers/MobileTimePicker";
+import { DesktopTimePicker } from "@mui/x-date-pickers/DesktopTimePicker";
+import { StaticTimePicker } from "@mui/x-date-pickers/StaticTimePicker";
 
-export default function ResponsiveTimePickers({time , setTime}) {
-
-  const handleChangeTime =(e) => {
-    console.log(e)
+export default function ResponsiveTimePickers({ time, setTime }) {
+  const handleChangeTime = (e) => {
+    e;
     let time1 = new Date(e);
-    console.log(time1.getHours())
-    console.log(time1.getMinutes())
-    setTime(`${time1.getHours()}:${time1.getMinutes()}`)
-  }
+    time1.getHours()(time1.getMinutes());
+    setTime(`${time1.getHours()}:${time1.getMinutes()}`);
+  };
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer
         components={[
-          'TimePicker',
-          'MobileTimePicker',
-          'DesktopTimePicker',
-          'StaticTimePicker',
+          "TimePicker",
+          "MobileTimePicker",
+          "DesktopTimePicker",
+          "StaticTimePicker",
         ]}
       >
         {/* <DemoItem label="Desktop variant">
           <DesktopTimePicker defaultValue={dayjs('2022-04-17T15:30')} />
         </DemoItem> */}
-        <DemoItem >
+        <DemoItem>
           <MobileTimePicker onChange={handleChangeTime} />
         </DemoItem>
         {/* <DemoItem label="Responsive variant">

@@ -25,17 +25,17 @@ const Complaint = () => {
         });
         if (response.data.status) {
           setclick([0]);
-          console.log(response);
+          response;
           setData(response.data.data);
         }
       } catch (e) {
         setError(e.message);
-        console.log(e);
+        e;
       }
     };
     getData();
   }, [delComplaint]);
-  console.log(data);
+  data;
 
   return (
     <div className="container">

@@ -16,10 +16,10 @@ export default function ShowTeachReq() {
       })
       .then((response) => response.data)
       .then((res) => setdata(res.subjects))
-      .catch((error) => console.log(error));
+      .catch((error) => error);
   }, []);
   {
-    data && console.log(data[0]);
+    data && data[0];
   }
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function ShowTeachReq() {
       .get(UrlSer)
       .then((response) => response.data)
       .then((res) => setSer(res.result))
-      .catch((error) => console.log(error));
+      .catch((error) => error);
   }, []);
   const showInfo = (id) => {
     navigate("/showInfo", { state: { id: id } });

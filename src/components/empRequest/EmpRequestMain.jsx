@@ -10,7 +10,7 @@ function EmpRequestMain() {
   const { setTClick, setidRq } = useContext(PopUp);
   const [image1, setImage1] = useState(null);
   const [image2, setImage2] = useState(null);
- const [formData, setFormData] = useState({}); 
+  const [formData, setFormData] = useState({});
 
   const handleImage1Change = (event) => {
     setImage1(event.target.files[0]);
@@ -35,21 +35,21 @@ function EmpRequestMain() {
     for (const key in formData) {
       formDataToSend.append(key, formData[key]);
     }
-    console.log("je")
+    ("je");
     try {
-      console.log(formDataToSend)
+      formDataToSend;
       const response = await axios.post(apiUrl, formDataToSend, {
         headers: {
           Accept: "application/json",
         },
       });
-      console.log(response);
+      response;
       if (response.status === 200) {
         setidRq(response.data.added_request_id);
         setTClick([0, 1, 0, 0, 0]);
       }
     } catch (error) {
-      console.log(error);
+      error;
       if (error.response.data.details)
         seterr(error.response.data.details[0].message);
       else seterr(error.response.data.message);
@@ -63,17 +63,17 @@ function EmpRequestMain() {
       .get(UrlNat)
       .then((response) => response.data)
       .then((res) => setNat(res.Nationalities))
-      .catch((error) => console.log(error));
+      .catch((error) => error);
     axios
       .get(UrlSer)
       .then((response) => response.data)
       .then((res) => setSer(res.result))
-      .catch((error) => console.log(error));
+      .catch((error) => error);
     axios
       .get(UrlMa)
       .then((response) => response.data)
       .then((res) => setMa(res.result))
-      .catch((error) => console.log(error));
+      .catch((error) => error);
   }, []);
   return (
     <div className="container teachingReq p-10 text-center">

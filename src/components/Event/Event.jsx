@@ -1,11 +1,9 @@
 import { React, useState, useEffect, useContext } from "react";
-import Logo from "../../assets/Logo.png";
 import axios from "axios";
 import { PopUp } from "../../App";
-import CloseIcon from "@mui/icons-material/Close";
 
 const Event = () => {
-  const { reload , setclick } = useContext(PopUp);
+  const { reload, setclick } = useContext(PopUp);
   const [data, setData] = useState({});
   const [error, setError] = useState("");
   const [delEvent, setDelEvent] = useState(false);
@@ -25,17 +23,17 @@ const Event = () => {
         });
         if (response.data.status) {
           setclick([0]);
-          console.log(response);
+          response;
           setData(response.data.data);
         }
       } catch (e) {
         setError(e.message);
-        console.log(e);
+        e;
       }
     };
     getData();
-  }, [delEvent,reload]);
-  console.log(data);
+  }, [delEvent, reload]);
+  data;
 
   const handleDelEvent = async (id) => {
     try {
@@ -51,36 +49,30 @@ const Event = () => {
         }
       );
       setDelEvent(!delEvent);
-      console.log(response);
+      response;
       if (response.data.status === 200) {
         setMessage(response.data.message);
       }
     } catch (e) {
-      console.log(e);
+      e;
     }
   };
 
   return (
     <div className="container">
-      <div className="p=10">
-        <h1 className="mt-6 mr-10 font-bold">الفعاليات</h1>
-        <button
-          onClick={() => setclick([0, 0, 0, 0, 0, 0, 0, 1])}
-          className="adding mr-auto"
-        >
-          إضافة
-        </button>
-        {data[0] && (
-          <div
-            className="container  p-10 mx-9"
-            style={{
-              width: "calc(100% - 100px)",
-              marginRight: "100px",
-              marginTop: "20px",
-              padding: "0 20px",
-            }}
+      <div className="p=10 mt-7 lg:mr-32 ml-10">
+        <div className="flex justify-between items-center">
+          <h1 className=" font-bold text-xl my-10">الفعاليات</h1>
+          <button
+            onClick={() => setclick([0, 0, 0, 0, 0, 0, 0, 1])}
+            className="adding mr-auto"
           >
-            <div className="header grid grid-cols-custom-8 items-center py-4 font-bold border-b-2">
+            إضافة
+          </button>
+        </div>
+        {data[0] && (
+          <div className="tableEmp bg-white border shadow rounded-[7px] p-10 m-9">
+            <div className="header grid grid-cols-8 items-center py-4 text-l font-bold border-b-2">
               <h2>اسم الفعالية</h2>
               <h2>التاريخ</h2>
               <h2>مكانها</h2>
@@ -90,10 +82,7 @@ const Event = () => {
               <h2></h2>
               <h2></h2>
             </div>
-            <div
-              className="overflow-auto  border-b-2"
-              style={{ maxHeight: "75vh" }}
-            >
+            <div className="overflow-auto  " style={{ maxHeight: "50vh" }}>
               {data.map((item, index) => (
                 <div
                   className="header grid grid-cols-custom-8 items-center py-4"
@@ -112,7 +101,7 @@ const Event = () => {
                     className="text-red-500"
                     onClick={() => handleDelEvent(item._id)}
                   >
-                    <CloseIcon />
+                    حذف
                   </button>
                 </div>
               ))}

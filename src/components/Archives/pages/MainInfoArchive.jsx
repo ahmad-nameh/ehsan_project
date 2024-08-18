@@ -54,7 +54,7 @@ const MainInfoArchive = () => {
           if (response.data.status) {
             setclick([0]);
           }
-          console.log(response);
+          response;
           setAlldata(response.data);
           setFormData(response.data.data[0]);
           setNumofChild(response.data.data[0].childs_num);
@@ -168,8 +168,8 @@ const MainInfoArchive = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(formDataToSend);
-      console.log(response);
+      formDataToSend;
+      response;
 
       if (response.status == 200) {
         setEmpId(response.data.added_employee_id);
@@ -196,22 +196,22 @@ const MainInfoArchive = () => {
       .get(UrlNat)
       .then((response) => response.data)
       .then((res) => setNat(res.Nationalities))
-      .catch((error) => console.log(error));
+      .catch((error) => error);
     axios
       .get(UrlSer)
       .then((response) => response.data)
       .then((res) => setSer(res.result))
-      .catch((error) => console.log(error));
+      .catch((error) => error);
     axios
       .get(UrlMa)
       .then((response) => response.data)
       .then((res) => setMa(res.result))
-      .catch((error) => console.log(error));
+      .catch((error) => error);
     axios
       .get(UrlSe)
       .then((response) => response.data)
       .then((res) => setSe(res.sectors))
-      .catch((error) => console.log(error));
+      .catch((error) => error);
   }, []);
   if (nat[0] && ser[0] && se[0] && ser[0]) {
     setclick([0]);

@@ -1,10 +1,9 @@
-
-import { React ,useContext } from "react";
+import { React, useContext } from "react";
 import { PopUp } from "../../../App";
 import { motion } from "framer-motion";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { AddStu } from "../AddStu";
-import { AddEvent } from "../../Event/AddEvent"
+import { AddEvent } from "../../Event/AddEvent";
 import { AddGrade } from "../AddGrade";
 import { Addfile } from "../Addfile";
 import Successimg from "../../../assets/pngwing.com.png";
@@ -14,6 +13,7 @@ import { WeekSchedule } from "../Schedules/WeekSchedule";
 import { ExamSchedule } from "../Schedules/ExamSchedule";
 import { StudentAbsense } from "../StudentDetailsPage/StudentAbsense";
 import { StudentViolation } from "../StudentDetailsPage/StudentViolation";
+import ShowFile from "../ShowFile";
 
 const PopupWindow = (props) => {
   const { click, tclick, setclick } = useContext(PopUp);
@@ -53,64 +53,59 @@ const PopupWindow = (props) => {
                 تم الحفظ بنجاح
               </p>
             </div>
-
           </div>
-          ) : props.name === "error" ? (
-            <div className="max-h-[90vh] ">
-              <div>
-                <p className="font-extrabold text-red text-2xl text-center">
-                  {props.errorMessage}
-                </p>
-              </div>
+        ) : props.name === "error" ? (
+          <div className="max-h-[90vh] ">
+            <div>
+              <p className="font-extrabold text-red text-2xl text-center">
+                {props.errorMessage}
+              </p>
             </div>
-          ) : (
-            <div
-              className=" relative container bg-white p-2 w-fit shadow-md 
+          </div>
+        ) : (
+          <div
+            className=" relative container bg-white p-2 w-fit shadow-md 
               rounded-md mx-auto top-1/2 -translate-y-1/2"
+          >
+            <div
+              className="absolute top-2 right-2 text-black/70 cursor-pointer rounded-full"
+              onClick={() => {
+                setclick([0, 0, 0, 0]);
+              }}
             >
-              <div
-                className="absolute top-2 right-2 text-black/70 cursor-pointer rounded-full"
-                onClick={() => {
-                  setclick([0, 0, 0, 0]);
-                }}
-              >
-                <IoIosCloseCircleOutline size={35} />
-              </div>
-              {props.name === "addStudent" ? (
-                <AddStu />
-              ) :
-              props.name === "addEvent" ? (
-                <AddEvent />
-              ) : props.name === "weeklySchedule" ? (
-                <WeekSchedule/>
-              ) : props.name === "examSchedule" ? (
-                <ExamSchedule/>
-              ): props.name === "addGrade" ? (
-                <AddGrade />
-              ) : props.name === "addAdminForClass" ? (
-                <AddAdminForClass />
-              ) : props.name === "AddClass" ? (
-                <AddClass />
-              ) : props.name === "addFile" ? (
-                <Addfile />
-              ): (props.name === "studentAbsense")&&props.type ==="adding"  ? (
-                <StudentAbsense name="adding"/>
-              ) 
-              : props.name === "studentAbsense"  ? (
-                <StudentAbsense />
-              ): (props.name === "studentViolation")&&props.type ==="adding"  ? (
-                <StudentViolation name="adding"/>
-              ) 
-              : props.name === "studentViolation"  ? (
-                <StudentViolation />
-              ) 
-              : null}
+              <IoIosCloseCircleOutline size={35} />
             </div>
-          )}
-        </motion.div>
-      </div>
-    )
-}
+            {props.name === "addStudent" ? (
+              <AddStu />
+            ) : props.name === "addEvent" ? (
+              <AddEvent />
+            ) : props.name === "weeklySchedule" ? (
+              <WeekSchedule />
+            ) : props.name === "examSchedule" ? (
+              <ExamSchedule />
+            ) : props.name === "addGrade" ? (
+              <AddGrade />
+            ) : props.name === "addAdminForClass" ? (
+              <AddAdminForClass />
+            ) : props.name === "AddClass" ? (
+              <AddClass />
+            ) : props.name === "addFile" ? (
+              <Addfile />
+            ) : props.name === "showFile" ? (
+              <ShowFile />
+            ) : props.name === "studentAbsense" && props.type === "adding" ? (
+              <StudentAbsense name="adding" />
+            ) : props.name === "studentAbsense" ? (
+              <StudentAbsense />
+            ) : props.name === "studentViolation" && props.type === "adding" ? (
+              <StudentViolation name="adding" />
+            ) : props.name === "studentViolation" ? (
+              <StudentViolation />
+            ) : null}
+          </div>
+        )}
+      </motion.div>
+    </div>
+  );
+};
 export default PopupWindow;
-
-
