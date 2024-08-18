@@ -18,7 +18,7 @@ export const StudentsTable =() => {
   const navigate = useNavigate();
 
   useEffect(()=>{
-      const getData = async () => {
+      const getClasses = async () => {
       try {
       const response = await axios.get(
           `${apiUrl}/showClasses`,
@@ -36,7 +36,7 @@ export const StudentsTable =() => {
       setError(e.message)
       }
   }
-  getData();
+  getClasses();
   },[])
 
   useEffect(()=>{
@@ -69,7 +69,6 @@ getData();
 },[searchData])
 
   const handleInputChange = (event) => {
-    console.log("A")
     setSearchData({
     ...searchData,
     [event.target.name]: event.target.value,
@@ -77,15 +76,21 @@ getData();
     });
     
 };
+  const handleSelectChange = (event) => {
+    localStorage.setItem("class",event.target.value)
+    setSearchData({
+    ...searchData,
+    [event.target.name]: event.target.value,
+    
+    });
+    
+  };
 
-const goToStudentInfoPage = (studentId) => {
-  navigate("/studentInfo",studentId);
-}
 console.log(searchData)
 
     return(
         <div>
-        <select className="w-40" name="class_id" onChange={handleInputChange} >
+        <select className="w-40" name="class_id" onChange={handleSelectChange} >
           <option value="">اختر</option>
           {classes[0]&&classes.map((item, index) => (
               <option key={index} value={item._id}>{item.name} {item.section}</option>
@@ -107,7 +112,6 @@ console.log(searchData)
               <button className="py-2 px-8 mx-2 shadow"
               onClick={() => setclick([0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0, 1])}
               >برنامج الامتحان</button>
-              <button className="py-2 px-8 mx-2 shadow">الملفات</button>
             </div>
             <div className="header grid grid-cols-5  py-4 font-bold">
                   <h2>اسم الطالب</h2>

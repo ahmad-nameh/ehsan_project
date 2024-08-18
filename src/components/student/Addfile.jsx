@@ -15,7 +15,58 @@ export const Addfile =() => {
     const [data,setData] = useState({});
     const [message,setMessage] = useState("");
     const [error,setError] = useState("")
-    const [img , setImg] = useState(null)
+    const [file , setFile] = useState(null)
+    const[classes,setClasses] = useState({});
+    const[class_id,setClass_id] = useState("");
+    const [subject,setSubject] = useState({});
+
+    
+    useEffect(()=>{
+        const getData = async () => {
+        try {
+        const response = await axios.get(
+            `${apiUrl}/showClasses`,
+            {
+            headers: {
+                Accept: "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+            }
+        );
+        console.log(response)
+        setClasses(response.data.data);
+        }
+        catch(e){
+        setError(e.message)
+        }
+    }
+    getData();
+    },[])
+
+    useEffect(()=>{
+        const getData = async () => {
+        try {
+        const response = await axios.post(
+            `${apiUrl}/showStudentsAndSubjectForClass`,{class_id:class_id},
+            {
+            headers: {
+                Accept: "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+            }
+        );
+        console.log(response)
+        // console.log(response1)
+        setSubject(response.data.subject)
+
+        }
+        catch(e){
+            console.log(e)
+        setError(e.message)
+        }
+    }
+    getData();
+    },[class_id])
 
     useEffect(()=>{
         const getData = async () => {
@@ -49,50 +100,48 @@ export const Addfile =() => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formDataToSend = new FormData();
-        formDataToSend.append("photo", img);
+        formDataToSend.append("file", file); 
     
+        formDataToSend.append("class_id[0]", class_id); 
+    
+        // Appending other form data
         for (const key in formData) {
             formDataToSend.append(key, formData[key]);
         }
     
         try {
-            setclick([0,0,0,0,0,1])
-        const response = await axios.post(
-            `${apiUrl}/addEvent`,formDataToSend,
-            {
-            headers: {
-                Accept: "application/json",
-                Authorization: `Bearer ${token}`,
-            },
+            const response = await axios.post(
+                `${apiUrl}/addFile`,
+                formDataToSend,
+                {
+                    headers: {
+                        Accept: "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            if(response.data.status) {
+                setMessage(response.data.message);
             }
-        );
-        
-        console.log(response)
-        if(response.data.status) {
-            setclick([0,0,0,0,1]);
-            setMessage(response.data.message)
+        } catch(e) {
+            console.log(e);
         }
-        console.log(formDataToSend)
-        }
-    
-        catch(e) {
-            setclick([0])
-            console.log(e)
-    }
-}
-    const handleInputChange = (event) => {
-        if(event.target.name == "photo") {
-            console.log("imgs")
-            setImg(event.target.files[0])
-            console.log(img)
-        }
-        else{
-        setFormData({
-        ...formData,
-        [event.target.name]: event.target.value,
-        });
-    }
     };
+    
+    const handleInputChange = (event) => {
+        if(event.target.name === "file") {
+            console.log("aa")
+            setFile(event.target.files[0]);
+        } else {
+            setFormData({
+                ...formData,
+                [event.target.name]: event.target.value,
+            });
+        }
+    };
+    
+console.log(file)
+    console.log(formData)
 
     return(
         <div>
@@ -103,9 +152,23 @@ export const Addfile =() => {
                         {/* <div> */}
                         <form onSubmit={handleSubmit} className="basis-1/3">
                             <label>اسم الملف</label><br/>
-                            <input type="text" placeholder="فعالية" className="w-full" name="name" required onChange={handleInputChange} /><br/>
+                            <input type="text" placeholder="اسم الملف" className="w-full" name="name" required onChange={handleInputChange} /><br/>
+                            <label>الصف</label><br/>
+                            <select className="w-40" name="class_id" onChange={(e)=>setClass_id(e.target.value)} >
+                                <option value="">اختر</option>
+                                {classes[0]&&classes.map((item, index) => (
+                                    <option key={index} value={item._id}>{item.name} {item.section}</option>
+                                ))}
+                            </select>
+                            <label>المادة</label><br/>
+                            <select className="w-40" name="subject_id" onChange={handleInputChange}>
+                                <option value="">اختر</option>
+                                {subject[0]&&subject.map((item,index)=>(
+                                    <option key={index} value={item._id}>{item.name}</option>
+                                ))}
+                            </select>
                             <label>الملف</label><br/>
-                            <input type="file" placeholder="first name" className="w-full" name="photo" onChange={handleInputChange}/><br/>
+                            <input type="file" className="w-full" name="file" onChange={handleInputChange}/><br/>
                             <button onClick={(e)=>handleSubmit} className="adding mx-auto mt-7">إضافة</button>
                         </form>
                         {/* </div> */}

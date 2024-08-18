@@ -29,7 +29,7 @@ export const StudentAbsense =(props) => {
             try {
                 const response = await axios.post(
                     `${apiUrl}/showStudentsAbsence`,
-                    { student_id: "66ad442007042ce972c0a0d0" },
+                    { student_id: localStorage.getItem("student")},
                     {
                         headers: {
                             Accept: "application/json",
@@ -84,7 +84,7 @@ const handleDelEvent = async (id) => {
             // setclick([0,0,0,0,0,1])
         const response = await axios.post(
             `${apiUrl}/addStudentAbsence`,{
-                student_id : '66ad442007042ce972c0a0d0',
+                student_id : localStorage.getItem("student"),
                 date : date,
                 delay_time : formData
             },
@@ -109,9 +109,6 @@ const handleDelEvent = async (id) => {
     }
 }
 
-console.log(data)
-console.log(absence)
-console.log(delay)
 return (
     <div>
         <div className="max-h-[90vh] overflow-auto bg-white pt-12 px-12 pb-6 text-[13px] addstu">
@@ -153,8 +150,11 @@ return (
                         </div>
                         {delay.map((item, index) => (
                             <div key={index} className="infoShow1 gap-11 items-center">
-                                <p>{item.date}</p>
-                                <p>{item.delay_time}</p>
+                                <div>
+                                    <p>{item.date}</p>
+                                    <p>مدة التأخير : {item.delay_time}</p>
+                                </div>
+                            
                                 <button className="text-red-500" onClick={()=>handleDelEvent(item._id)}>
                                     <CloseIcon/>
                                 </button>

@@ -29,7 +29,7 @@ export const ExamSchedule =(props) => {
             // console.log(day)
         const response = await axios.post(
             `${apiUrl}/showExamSchedule`,{
-                class_id :"66ad42c654ed758ed6e2420b",
+                class_id :localStorage.getItem("class"),
             },
             {
             headers: {
@@ -41,7 +41,6 @@ export const ExamSchedule =(props) => {
         if(response.data.status) {
         // setclick([0])
         console.log(response)
-        console.log("alo")
         setData(response.data.data)
         }
         
@@ -73,7 +72,7 @@ export const ExamSchedule =(props) => {
             `${apiUrl}/addExamSchedule`,{
                 name: formData,
                 date: date,
-                class_id :"66ad42c654ed758ed6e2420b",
+                class_id :localStorage.getItem("class"),
                 time : time
             },
             {
@@ -87,9 +86,6 @@ export const ExamSchedule =(props) => {
         console.log(response)
         if(response.data.status) {
             setChange(!change)
-            setFormData({})
-            // setclick([0,0,0,0,1]);
-            // setMessage(response.data.message)
         }
         console.log(formData)
         }
@@ -158,7 +154,7 @@ export const ExamSchedule =(props) => {
                         <div className="flex gap-5 items-center">
                         <p className="text-xl text-gray-500"><AccessTimeIcon className="clock"/>{item.time}</p>
                         <div>
-                            <ClearIcon onClick={()=>handleDel(item._id)}/><br/>
+                            <ClearIcon className="cursor-pointer" onClick={()=>handleDel(item._id)}/><br/>
                             <EditIcon/>
                         </div>
                         </div>

@@ -15,8 +15,32 @@ export const AddGrade =() => {
     const [error, setError] = useState("");
     const [message , setMessage] = useState("")
     const [studetns, setStudents] = useState({});
+    const[classes,setClasses] = useState({});
+    const[class_id,setClass_id] = useState("");
     const [subject,setSubject] = useState({});
     const token = localStorage.getItem("token")
+
+    useEffect(()=>{
+        const getData = async () => {
+        try {
+        const response = await axios.get(
+            `${apiUrl}/showClasses`,
+            {
+            headers: {
+                Accept: "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+            }
+        );
+        console.log(response)
+        setClasses(response.data.data)
+        }
+        catch(e){
+        setError(e.message)
+        }
+    }
+    getData();
+    },[])
 
     const handleSelctionChange = (event) => {
             console.log(event)
@@ -27,45 +51,18 @@ export const AddGrade =() => {
             })
         console.log(formData)
     };
-//     const handleMarksChange = (id) => {
-//         console.log(id)
-        
-//             // setStudentMarks({
-//             // ...studentMarks,
-//             // id: id,
-//             // mark: event.target.value
-            
-//             // });
-//             // setStudentMarks(prevMarks => 
-//             //     prevMarks.map(student =>
-//             //         student.id === id ? { ...student, mark: event.target.value } : "a"
-//             //     )
-//             // );
-//             // const handleMarksChange = (id, event) => {
-//                 const newMark = event.target.value;
-//                 setStudentMarks(prevMarks => 
-//                     prevMarks.map(student =>
-//                         student.id === id ? { ...student, mark: newMark } : student
-//                     )
-//                 );
-//             // };
-//             console.log(studentMarks)
-        
-// };
+
 const handleMarksChange = (id) => {
     const newMark = event.target.value;
     
     setStudentMarks(prevMarks => {
-        // Check if the student already exists
         const studentExists = prevMarks.some(student => student.id === id);
         
         if (studentExists) {
-            // Update existing student's mark
             return prevMarks.map(student =>
                 student.id === id ? { ...student, mark: newMark } : student
             );
         } else {
-            // Add new student object
             return [...prevMarks, { id: id, mark: newMark }];
         }
     });
@@ -77,7 +74,7 @@ const handleMarksChange = (id) => {
         const getData = async () => {
         try {
         const response = await axios.post(
-            `${apiUrl}/showStudentsAndSubjectForClass`,{class_id:"66ad42c654ed758ed6e24208"},
+            `${apiUrl}/showStudentsAndSubjectForClass`,{class_id:class_id},
             {
             headers: {
                 Accept: "application/json",
@@ -91,12 +88,12 @@ const handleMarksChange = (id) => {
         setStudents(response.data.students)
         }
         catch(e){
-            console.log("erroe")
+            console.log(e)
         setError(e.message)
         }
     }
     getData();
-    },[])
+    },[class_id])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -127,8 +124,9 @@ const handleMarksChange = (id) => {
             console.log(e)
         }
     }
-    // console.log(classes)
+    console.log(class_id)
     console.log(formData)
+
 
 
     return(
@@ -137,9 +135,11 @@ const handleMarksChange = (id) => {
             <form>
                 <div className=" bg-white p-12 text-[13px] ">
                     <div className="flex items-center flex-wrap addGradeSelectData gap-4" style={{direction:'rtl'}}>
-                    <select name="">
-                        <option>السابع</option>
-                        <option>التامن</option>
+                    <select className="w-40" name="class_id" onChange={(e)=>setClass_id(e.target.value)} >
+                        <option value="">اختر</option>
+                        {classes[0]&&classes.map((item, index) => (
+                            <option key={index} value={item._id}>{item.name} {item.section}</option>
+                        ))}
                     </select>
                     <select name="type" onChange={handleSelctionChange}>
                         <option>امتحان</option>
