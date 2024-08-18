@@ -6,9 +6,7 @@ import { CiCirclePlus } from "react-icons/ci";
 import { StudentsTable } from "./components/student/StudentsTable";
 import { PopUp } from "./App";
 
-
 function Home2() {
-
   const { click, tclick, setclick } = useContext(PopUp);
 
   return (
@@ -17,7 +15,7 @@ function Home2() {
         <div className="flex flex-col  items-center lg:flex-row gap-3 justify-around flex-wrap py-10 mt-11 mx-auto ">
           <div
             className="homeBtn relative cursor-pointer"
-            onClick={() => setclick([0, 0, 0, 0, 0, 0,1])}
+            onClick={() => setclick([0, 0, 0, 0, 0, 0, 1])}
           >
             <div className="absolute px-9 py-6 -top-4 -left-5 border border-gray-300 rounded-[20px] bg-white shadow ">
               <CiCirclePlus size={25} color="gray" />
@@ -45,7 +43,7 @@ function Home2() {
           </div>
           <div
             className="homeBtn relative cursor-pointer"
-            onClick={() => setclick([0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0, 1])}
+            onClick={() => setclick([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1])}
           >
             <div className="absolute px-9 py-6 -top-4 -left-5 border border-gray-300 rounded-[20px] bg-white shadow">
               <CiCirclePlus size={25} color="gray" />
@@ -55,7 +53,7 @@ function Home2() {
             </div>
             <div>
               <img className="w-[75px]" src={img1} alt="" />
-            </div> 
+            </div>
           </div>
         </div>
 

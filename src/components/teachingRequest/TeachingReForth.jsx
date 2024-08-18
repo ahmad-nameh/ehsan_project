@@ -23,7 +23,7 @@ export default function TeachingReForth() {
       setarrdata((i) => [...i, name]);
       setValue("");
     } catch (error) {
-      console.log(error);
+      error;
       if (error.response.data.details)
         seterr(error.response.data.details[0].message);
       else seterr(error.response.data.message);

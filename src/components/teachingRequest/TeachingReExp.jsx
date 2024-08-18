@@ -29,7 +29,7 @@ export default function TeachingReExp() {
       setarrdata((i) => i + 1);
       setValue("");
     } catch (error) {
-      console.log(error);
+      error;
       if (error.response.data.details)
         seterr(error.response.data.details[0].message);
       else seterr(error.response.data.message);

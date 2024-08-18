@@ -23,12 +23,12 @@ const ShowClasses = ({ state, setState }) => {
         });
         if (response.data.status) {
           setclick([0]);
-          console.log(response);
+          response;
           setData(response.data.data);
         }
       } catch (e) {
         setError(e.message);
-        console.log(e);
+        e;
       }
     };
     if (state[1]) getData();
@@ -52,7 +52,7 @@ const ShowClasses = ({ state, setState }) => {
         setMessage(response.data.message);
       }
     } catch (e) {
-      console.log(e);
+      e;
     }
   };
 

@@ -26,7 +26,7 @@ export default function ShowInfo() {
               },
             }
           );
-          console.log(response);
+          response;
           setAlldata(response);
         } catch (error) {
           console.error(error);
@@ -40,7 +40,7 @@ export default function ShowInfo() {
     return date;
   };
   const handelApprove = async () => {
-    console.log(allData.data?.data?.request_id);
+    allData.data?.data?.request_id;
 
     try {
       const response = await axios.post(

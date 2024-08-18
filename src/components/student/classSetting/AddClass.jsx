@@ -27,15 +27,15 @@ export const AddClass = () => {
         }
       );
 
-      console.log(response);
+      response;
       if (response.data.status) {
         setReload((i) => i + 1);
         setMessage(response.data.message);
       }
-      console.log(formDataToSend);
+      formDataToSend;
     } catch (e) {
       setclick([0]);
-      console.log(e);
+      e;
     }
   };
 

@@ -36,7 +36,7 @@ const NavBar = () => {
 
   const handleLogout = async () => {
     try {
-      console.log(token);
+      token;
       const response = await axios.post(
         `${apiUrl}/logout`,
         {},

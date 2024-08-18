@@ -18,7 +18,7 @@ export default function TableEmp() {
       })
       .then((response) => response.data)
       .then((res) => setdata(res.subjects))
-      .catch((error) => console.log(error));
+      .catch((error) => error);
   }, []);
   useEffect(() => {
     const UrlSer = process.env.REACT_APP_API_URL + "showStatuses";
@@ -26,7 +26,7 @@ export default function TableEmp() {
       .get(UrlSer)
       .then((response) => response.data)
       .then((res) => setSer(res.result))
-      .catch((error) => console.log(error));
+      .catch((error) => error);
   }, []);
   const showInfo = (id) => {
     navigate("/showInfo2", { state: { id: id } });

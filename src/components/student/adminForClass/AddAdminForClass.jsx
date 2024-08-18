@@ -34,15 +34,15 @@ export const AddAdminForClass = () => {
         }
       );
 
-      console.log(response);
+      response;
       if (response.data.status) {
         setclick([0, 0, 0, 0, 1]);
         setMessage(response.data.message);
       }
-      console.log(formDataToSend);
+      formDataToSend;
     } catch (e) {
       setclick([0]);
-      console.log(e);
+      e;
     }
   };
 
@@ -60,7 +60,7 @@ export const AddAdminForClass = () => {
         }
       } catch (e) {
         setError(e.message);
-        console.log(e);
+        e;
       }
     };
     getData();
@@ -79,7 +79,7 @@ export const AddAdminForClass = () => {
         }
       } catch (e) {
         setError(e.message);
-        console.log(e);
+        e;
       }
     };
     getDataClass();

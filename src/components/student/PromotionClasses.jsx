@@ -21,7 +21,7 @@ const PromotionClasses = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log(response);
+        response;
         setClasses(response.data.data);
       } catch (e) {
         setError(e.message);
@@ -45,7 +45,7 @@ const PromotionClasses = () => {
               },
             }
           );
-          console.log(response);
+          response;
 
           if (response.status === 200) {
             setclick([0, 0, 0, 0, 1]);

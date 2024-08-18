@@ -115,7 +115,9 @@ const App = () => {
           <PopupWindow name="studentViolation" type="adding" />
         ) : click[17] ? (
           <PopupWindow name="studentViolation" />
-        ): null}
+        ) : click[18] ? (
+          <PopupWindow name="showFile" />
+        ) : null}
       </PopUp.Provider>
     </div>
   );
