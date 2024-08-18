@@ -4,12 +4,7 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import axios from "axios";
 
 export const AddGrade = () => {
-  const [formData, setFormData] = useState({
-    subject_id: "",
-    type: "امتحان",
-    date: "2024",
-    full_mark: "100",
-  });
+  const [formData, setFormData] = useState({});
   const [studentMarks, setStudentMarks] = useState([]);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
@@ -31,7 +26,7 @@ export const AddGrade = () => {
         response;
         setClasses(response.data.data);
       } catch (e) {
-        setError(e.message);
+        setError(response.data.message);
       }
     };
     getData();
@@ -80,8 +75,7 @@ export const AddGrade = () => {
         setSubject(response.data.subject);
         setStudents(response.data.students);
       } catch (e) {
-        e;
-        setError(e.message);
+        setError(response.data.message);
       }
     };
     getData();
@@ -109,12 +103,10 @@ export const AddGrade = () => {
           },
         }
       );
-      response;
-      if (response.data.status) {
-        setMessage(response.data.message);
-      }
+
+      setMessage(response.data.message);
     } catch (e) {
-      e;
+      setError(e.message);
     }
   };
 
