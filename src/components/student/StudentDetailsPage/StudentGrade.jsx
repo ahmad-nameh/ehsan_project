@@ -6,7 +6,7 @@ const StudentGrade =(props) => {
     return(
         <div>
             <div className="bg-white border shadow rounded-[7px] pt-8 px-10 pb-2 mx-9 relative" style={{direction:"ltr"}}>
-              <button className="absolute top-2 left-2"><ZoomInIcon/></button>
+              {/* <button className="absolute top-2 left-2"><ZoomInIcon/></button> */}
             <div className="header grid p-3 bg-white border shadow justify-between rounded-[1px]"
             style={{gridTemplateColumns:"200px 100px 75px 75px 100px"}}>
             <h2 className="mx-1">اسم المادة</h2>

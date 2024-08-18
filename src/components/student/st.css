@@ -128,3 +128,13 @@ form.Deta input.editable {
     border-radius: 12px;
     display: block;
 }
+
+.css-1la267r-MuiAreaElement-root {
+    fill: #a3d7ec9c !important;
+}
+.css-xyaj9i-MuiMarkElement-root {
+    stroke: #a3d7ec9c !important;
+}
+.css-wn5hww-MuiLineElement-root {
+    stroke: #a3d7ec9c !important;
+}

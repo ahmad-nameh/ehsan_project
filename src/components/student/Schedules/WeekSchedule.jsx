@@ -23,11 +23,9 @@ export const WeekSchedule =(props) => {
         // setclick([0,0,0,0,0,1])
         
         try {
-            console.log("a")
-            console.log(day)
         const response = await axios.post(
             `${apiUrl}/showWeekSchedule`,{
-                class_id :"66ad42c654ed758ed6e2420b",
+                class_id :localStorage.getItem("class"),
                 day :day
             },
             {
@@ -80,20 +78,55 @@ export const WeekSchedule =(props) => {
     console.log(formData)
     console.log(data)
 
+    console.log(localStorage.getItem("class"))
+
     console.log(day)
     const handleAddToProgram = async(e) => {
         e.preventDefault();
-        setFormData({
-            ...formData,
-            day : day,
-            class_id :"66ad42c654ed758ed6e2420b",
-            order: period
-        })
+        // setFormData({
+        //     ...formData,
+        //     day : day,
+        //     class_id :localStorage.getItem("class"),
+        //     order: period
+        // })
         
         try {
             // setclick([0,0,0,0,0,1])
         const response = await axios.post(
-            `${apiUrl}/addWeekSchedule`,formData,
+            `${apiUrl}/addWeekSchedule`,{name:formData.name,
+                teacher : formData.teacher,
+                day : day,
+                class_id :localStorage.getItem("class"),
+                order: period
+            },
+            {
+            headers: {
+                Accept: "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+            }
+        );
+        
+        console.log(response)
+        if(response.data.status) {
+            setChangeDay(!changeDay)
+            // setMessage(response.data.message)
+        }
+        console.log(formData)
+        }
+    
+        catch(e) {
+            // setclick([0])
+            console.log(e)
+    }
+    }
+    const handleDel = async(id) => {        
+        try {
+            // setclick([0,0,0,0,0,1])
+        const response = await axios.post(
+            `${apiUrl}/deleteWeekSchedule`,{
+                id: id
+            },
             {
             headers: {
                 Accept: "application/json",
@@ -146,22 +179,20 @@ export const WeekSchedule =(props) => {
                 </ul>
                 <label>الاستاذ</label><br/>
                 <input type="text" className="w-full" name="teacher" required placeholder="المدرس" value={formData.teacher} onChange={handleInputChange}/><br/>
-                {/* <label>الوقت والتاريخ</label>
-                <ResponsiveDateTimePickers/> */}
 
                 <button className="adding mx-auto" onClick={(e)=>handleAddToProgram}>إضافة</button>
                 </form>
             </div>
             {data[0]&&
-            <div className="flex basis-2/3 justify-around flex-wrap">
+            <div className="flex basis-2/3 justify-around flex-wrap max-w-lg">
                 {data.map((item,index) => (
-                <div className="bg-white p-3 rounded-xl basis-60 border-2 border-slate-100 h-28 relative classmate w-40" key={index} >
+                <div className="bg-white p-3 w-60 rounded-xl basis-60 border-2 border-slate-100 h-28 relative classmate w-40" key={index} >
                     <h3 className="font-bold">{item.name}</h3>
                     <p className="mt-2.5 mb-3.5">الحصة :{item.order}</p>
                     <hr/>
                     <p className="mt-2"><span className="font-bold">أ : </span>{item.teacher}</p>
                     <div className="absolute top-1 left-1">
-                        <ClearIcon/><br/>
+                        <ClearIcon className="cursor-pointer" onClick={()=>handleDel(item._id)}/><br/>
                         <EditIcon/>
                     </div>
                 </div>

@@ -5,7 +5,7 @@ import { PopUp } from "../../App";
 import CloseIcon from "@mui/icons-material/Close";
 
 const Event = () => {
-  const { click, tclick, setclick } = useContext(PopUp);
+  const { reload , setclick } = useContext(PopUp);
   const [data, setData] = useState({});
   const [error, setError] = useState("");
   const [delEvent, setDelEvent] = useState(false);
@@ -34,7 +34,7 @@ const Event = () => {
       }
     };
     getData();
-  }, [delEvent]);
+  }, [delEvent,reload]);
   console.log(data);
 
   const handleDelEvent = async (id) => {

@@ -59,25 +59,25 @@ const MainInfoArchive = () => {
           setFormData(response.data.data[0]);
           setNumofChild(response.data.data[0].childs_num);
           if (response.data.data[0].autograph_photo) {
-            const photoFilename = response.data.data[0].autograph_photo;
-            const photoUrl = `http://127.0.0.1:8000/${photoFilename}`;
+            const photoUrl = response.data.data[0].autograph_photo;
+            // const photoUrl = `http://127.0.0.1:8000/${photoFilename}`;
 
             setProfilePhoto(photoUrl);
 
-            const fileExtension = response.data.data[0].autograph_photo
-              .split(".")
-              .pop();
-            const mimeType = `image/${fileExtension}`;
-            const blob = new Blob(["Placeholder content"], { type: mimeType });
-            const file = new File(
-              [blob],
-              response.data.data[0].autograph_photo,
-              { type: mimeType }
-            );
+            // const fileExtension = response.data.data[0].autograph_photo
+            //   .split(".")
+            //   .pop();
+            // const mimeType = `image/${fileExtension}`;
+            // const blob = new Blob(["Placeholder content"], { type: mimeType });
+            // const file = new File(
+            //   [blob],
+            //   response.data.data[0].autograph_photo,
+            //   { type: mimeType }
+            // );
 
             setFormData((prevFormData) => ({
               ...prevFormData,
-              autograph_photo: file,
+              autograph_photo: profilePhoto,
             }));
           }
         } catch (error) {
@@ -196,6 +196,7 @@ const MainInfoArchive = () => {
     const UrlSer = process.env.REACT_APP_API_URL + "showStatuses";
     const UrlMa = process.env.REACT_APP_API_URL + "showMServices";
     const UrlSe = process.env.REACT_APP_API_URL + "showSectors";
+    setclick([0,0,0,0,0,1])
     axios
       .get(UrlNat)
       .then((response) => response.data)
@@ -217,6 +218,9 @@ const MainInfoArchive = () => {
       .then((res) => setSe(res.sectors))
       .catch((error) => console.log(error));
   }, []);
+  if(nat[0]&&ser[0]&&se[0]&&ser[0]) {
+    setclick([0])
+  }
   return (
     <div className="registeration">
       <form onSubmit={handleSubmit}>

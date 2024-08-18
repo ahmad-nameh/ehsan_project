@@ -46,7 +46,7 @@ const App = () => {
             ) : (
               <Route path="/" element={<PrivateRoute element={Home} />} />
             )}
-
+            <Route path="/student" element={<PrivateRoute element={Home2} />} />
             <Route
               path="/archive"
               element={<PrivateRoute element={MainInfoArchive} />}
@@ -111,7 +111,11 @@ const App = () => {
           <PopupWindow name="studentAbsense" type="adding" />
         ) : click[15] ? (
           <PopupWindow name="studentAbsense" />
-        ) : null}
+        ) : click[16] ? (
+          <PopupWindow name="studentViolation" type="adding" />
+        ) : click[17] ? (
+          <PopupWindow name="studentViolation" />
+        ): null}
       </PopUp.Provider>
     </div>
   );

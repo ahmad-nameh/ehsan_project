@@ -12,13 +12,15 @@ const StudentInfo = () => {
 
     const location = useLocation();
 
-    const { click ,tclick , setclick} = useContext(PopUp);
+    const { reload , setclick} = useContext(PopUp);
     const [data , setData] = useState({});
     const [error , setError] = useState('')
 
     const apiUrl = process.env.REACT_APP_API_URL;
 
     const token = localStorage.getItem("token")
+
+    localStorage.setItem("student",location.state.studentId)
 
     useEffect(()=>{
         const getData = async () => {
@@ -57,18 +59,18 @@ const StudentInfo = () => {
             {data&&data.absence&&data.delay&&data.violation&&<div className="container flex justify-between flex-wrap mt-12 px-10 mb-10">
                 <div className=" basis-8/12">
                     <div className="flex justify-center" style={{gap:100}}>
-                        <div className="flex items-center gap-10 relative border border-gray-300 rounded-[20px] bg-white shadow p-5">
+                        <div className="flex items-center gap-10 relative w-64 border border-gray-300 rounded-[20px] bg-white shadow p-5">
                             <div className="flex items-center gap-5">
                                 <p className="text-x as">المخالفات<br/>{data.violation&&(data.violation.length)}</p>
                                 <RemoveIcon className="icon text-5xl rounded-full"/>
                             </div>
-                            <button>تفاصيل</button>
+                            <button onClick={()=>setclick([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1])}>تفاصيل</button>
                             {/* <button style={{color:"#00000078"}}> */}
                                 <AddCircleOutlineIcon className="absolute text-x" style={{bottom: -10,left:-10}} 
-                            />
+                                onClick={()=>setclick([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1])}/>
                             {/* </button> */}
                         </div>
-                        <div className="flex items-center gap-10 relative border border-gray-300 rounded-[20px] bg-white shadow p-5">
+                        <div className="flex items-center gap-10 relative w-64 border border-gray-300 rounded-[20px] bg-white shadow p-5">
                             <div className="flex items-center gap-5">
                                 <p className="text-x as">الغيابات<br/>{data.absence&&(data.absence.length + data.delay.length)}</p>
                                 <PersonOffIcon className="icon text-5xl  rounded-full"/>

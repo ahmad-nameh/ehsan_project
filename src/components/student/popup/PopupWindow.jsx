@@ -13,6 +13,7 @@ import { AddClass } from "../classSetting/AddClass";
 import { WeekSchedule } from "../Schedules/WeekSchedule";
 import { ExamSchedule } from "../Schedules/ExamSchedule";
 import { StudentAbsense } from "../StudentDetailsPage/StudentAbsense";
+import { StudentViolation } from "../StudentDetailsPage/StudentViolation";
 
 const PopupWindow = (props) => {
   const { click, tclick, setclick } = useContext(PopUp);
@@ -97,6 +98,11 @@ const PopupWindow = (props) => {
               ) 
               : props.name === "studentAbsense"  ? (
                 <StudentAbsense />
+              ): (props.name === "studentViolation")&&props.type ==="adding"  ? (
+                <StudentViolation name="adding"/>
+              ) 
+              : props.name === "studentViolation"  ? (
+                <StudentViolation />
               ) 
               : null}
             </div>
