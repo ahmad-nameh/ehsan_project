@@ -48,19 +48,11 @@ export const ExamSchedule = (props) => {
       }
     };
     getData();
-  }, [change])(
-    // const handleInputChange =(event) => {
-    //     setFormData({
-    //         ...formData,
-    //         [event.target.name] : event.target.value
-    //     })
-    // }
-    formData
-  )(data);
+  }, [change]);
 
-  //  (day)
   const handleAddToProgram = async (e) => {
     e.preventDefault();
+    console.log(time);
 
     try {
       // setclick([0,0,0,0,0,1])
@@ -119,7 +111,7 @@ export const ExamSchedule = (props) => {
       e;
     }
   };
-  formData(date)(time);
+
   return (
     <div className="examschedule">
       <h2 className="text-l text-center mt-6">برنامج الامتحان</h2>
@@ -139,7 +131,7 @@ export const ExamSchedule = (props) => {
             <br />
             <label>التاريخ</label>
             <br />
-            <DatePiker datee={date} setDate={setDate} />
+            <DatePiker date={date} setDate={setDate} />
             <label>الوقت</label>
             <ResponsiveDateTimePickers time={time} setTime={settime} />
             <button
@@ -154,15 +146,15 @@ export const ExamSchedule = (props) => {
           <div className="max-h-96 overflow-auto">
             {data.map((item, index) => (
               <div
-                className=" flex gap-3 justify-between items-center p-4 h-28 classmate w-80 "
+                className=" flex gap-3 justify-around items-center p-4 h-28 classmate w-80 "
                 key={index}
               >
-                <p className="text-3xl">
+                <p className="text-2xl">
                   {new Date(item.date).getDate()}
                   <br />/{new Date(item.date).getMonth()}
                 </p>
                 <div className="flex justify-between items-center border-y-2 p-3 border-slate-300 gap-14">
-                  <p className="text-xl">
+                  <p className="text-lg">
                     {item.name}
                     <br />
                     <span className="text-base text-gray-600">
@@ -170,7 +162,7 @@ export const ExamSchedule = (props) => {
                     </span>
                   </p>
                   <div className="flex gap-5 items-center">
-                    <p className="text-xl text-gray-500">
+                    <p className="text-lg text-gray-500">
                       <AccessTimeIcon className="clock" />
                       {item.time}
                     </p>

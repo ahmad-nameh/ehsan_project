@@ -10,9 +10,8 @@ import { StaticTimePicker } from "@mui/x-date-pickers/StaticTimePicker";
 
 export default function ResponsiveTimePickers({ time, setTime }) {
   const handleChangeTime = (e) => {
-    e;
     let time1 = new Date(e);
-    time1.getHours()(time1.getMinutes());
+    time1.getHours(time1.getMinutes());
     setTime(`${time1.getHours()}:${time1.getMinutes()}`);
   };
 

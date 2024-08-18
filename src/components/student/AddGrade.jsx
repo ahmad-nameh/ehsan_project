@@ -6,9 +6,9 @@ import axios from "axios";
 export const AddGrade = () => {
   const [formData, setFormData] = useState({
     subject_id: "",
-    type: "",
-    date: 0,
-    full_mark: "",
+    type: "امتحان",
+    date: "2024",
+    full_mark: "100",
   });
   const [studentMarks, setStudentMarks] = useState([]);
   const [error, setError] = useState("");
@@ -38,8 +38,6 @@ export const AddGrade = () => {
   }, []);
 
   const handleSelctionChange = (event) => {
-    event;
-
     setFormData({
       ...formData,
       [event.target.name]: event.target.value,
@@ -91,6 +89,7 @@ export const AddGrade = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     // setclick([1,0,0,0,0])
     //  (studentMarks)
     //  (e)
@@ -111,14 +110,13 @@ export const AddGrade = () => {
         }
       );
       response;
-      if (response.data.status === 200) {
+      if (response.data.status) {
         setMessage(response.data.message);
       }
     } catch (e) {
       e;
     }
   };
-  class_id(formData);
 
   return (
     <div>
@@ -143,9 +141,9 @@ export const AddGrade = () => {
                 ))}
             </select>
             <select name="type" onChange={handleSelctionChange}>
-              <option>امتحان</option>
-              <option>مذاكرة</option>
-              <option>شفهي</option>
+              <option value={"امتحان"}>امتحان</option>
+              <option value={"مذاكرة"}>مذاكرة</option>
+              <option value={"شفهي"}>شفهي</option>
             </select>
             {subject[0] && (
               <select name="subject_id" onChange={handleSelctionChange}>
@@ -159,7 +157,7 @@ export const AddGrade = () => {
             <input
               type="number"
               placeholder="العلامة الكاملة"
-              className="w-24"
+              className="w-40"
               name="full_mark"
               onChange={handleSelctionChange}
             />
@@ -187,6 +185,7 @@ export const AddGrade = () => {
               </div>
             </div>
           )}
+          <div className="text-center">{message}</div>
         </div>
         <button
           onClick={handleSubmit}

@@ -70,7 +70,6 @@ export const WeekSchedule = (props) => {
       [event.target.name]: event.target.value,
     });
   };
-  formData(data)(localStorage.getItem("class"))(day);
   const handleAddToProgram = async (e) => {
     e.preventDefault();
     // setFormData({
@@ -143,7 +142,7 @@ export const WeekSchedule = (props) => {
   return (
     <div>
       <h2 className="text-l text-center mt-6">برنامج الاسبوع</h2>
-      <ul className="flex gap-2  w-fit my-5 mx-auto  rounded-full text-white bg-cyan-600">
+      <ul className="flex gap-2  w-fit my-5 mx-auto px-4  rounded-full text-white bg-cyan-600">
         <li>
           <button
             className="px-2 py-2 rounded-full duration-500 bg-cyan-800"
@@ -185,7 +184,7 @@ export const WeekSchedule = (props) => {
           </button>
         </li>
       </ul>
-      <div className="flex max-h-[90vh] overflow-auto flex bg-white p-12 text-[13px] justify-between addClassmate gap-4">
+      <div className="flex max-h-[90vh] overflow-auto flex bg-white p-12 text-[13px] justify-between addClassmate gap-20">
         <div className="basis-1/3 " style={{ direction: "rtl" }}>
           <form onSubmit={handleAddToProgram}>
             <label>المادة</label>
@@ -201,51 +200,51 @@ export const WeekSchedule = (props) => {
             <br />
             <label>الحصة</label>
             <br />
-            <ul className="flex gap-2 lessons">
+            <ul className="flex gap-1 lessons">
               <li
-                className="text-white bg-sky-400 bg-sky-700 p-2 rounded-xl cursor-pointer"
+                className="text-white bg-sky-400 w-8 h-8 text-center text-lg rounded-full cursor-pointer"
                 onClick={setPeriod}
               >
                 1
               </li>
               <li
-                className="text-white bg-sky-400 p-2 rounded-xl cursor-pointer"
+                className="text-white bg-sky-400 w-8 h-8 text-center text-lg rounded-full cursor-pointer"
                 onClick={setPeriod}
               >
                 2
               </li>
               <li
-                className="text-white bg-sky-400 p-2 rounded-xl cursor-pointer"
+                className="text-white bg-sky-400 w-8 h-8 text-center text-lg rounded-full cursor-pointer"
                 onClick={setPeriod}
               >
                 3
               </li>
               <li
-                className="text-white bg-sky-400 p-2 rounded-xl cursor-pointer"
+                className="text-white bg-sky-400 w-8 h-8 text-center text-lg rounded-full cursor-pointer"
                 onClick={setPeriod}
               >
                 4
               </li>
               <li
-                className="text-white bg-sky-400 p-2 rounded-xl cursor-pointer"
+                className="text-white bg-sky-400 w-8 h-8 text-center text-lg rounded-full cursor-pointer"
                 onClick={setPeriod}
               >
                 5
               </li>
               <li
-                className="text-white bg-sky-400 p-2 rounded-xl cursor-pointer"
+                className="text-white bg-sky-400 w-8 h-8 text-center text-lg rounded-full cursor-pointer"
                 onClick={setPeriod}
               >
                 6
               </li>
               <li
-                className="text-white bg-sky-400 p-2 rounded-xl cursor-pointer"
+                className="text-white bg-sky-400 w-8 h-8 text-center text-lg rounded-full cursor-pointer"
                 onClick={setPeriod}
               >
                 7
               </li>
               <li
-                className="text-white bg-sky-400 p-2 rounded-xl cursor-pointer"
+                className="text-white bg-sky-400 w-8 h-8 text-center text-lg rounded-full cursor-pointer"
                 onClick={setPeriod}
               >
                 8
@@ -273,10 +272,10 @@ export const WeekSchedule = (props) => {
           </form>
         </div>
         {data[0] && (
-          <div className="flex basis-2/3 justify-around flex-wrap max-w-lg">
+          <div className="flex basis-2/3 justify-around flex-wrap max-w-lg gap-4">
             {data.map((item, index) => (
               <div
-                className="bg-white p-3 w-60 rounded-xl basis-60 border-2 border-slate-100 h-28 relative classmate w-40"
+                className="bg-white p-3 w-60 rounded-xl basis-60 border-2 border-slate-100 h-28 relative classmate "
                 key={index}
               >
                 <h3 className="font-bold">{item.name}</h3>

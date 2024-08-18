@@ -19,7 +19,7 @@ export const StudentsTable = () => {
   useEffect(() => {
     const getClasses = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/showClasses`, {
+        const response = await axios.get(`${apiUrl}showClasses`, {
           headers: {
             Accept: "application/json",
             Authorization: `Bearer ${token}`,
@@ -52,8 +52,6 @@ export const StudentsTable = () => {
           setclick([0]);
           setData(response.data.data);
         }
-        response;
-        setClasses(response.data.data);
       } catch (e) {
         setclick([0]);
         setError(e.message);
