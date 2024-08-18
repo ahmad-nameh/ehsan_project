@@ -10,7 +10,7 @@ const ShowEmp = () => {
 
   const navigate = useNavigate();
 
-  const apiUrl = process.env.REACT_APP_API_URL
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     if (searchWord != null) {
@@ -39,15 +39,12 @@ const ShowEmp = () => {
     } else {
       const fetchData = async () => {
         try {
-          const response = await axios.get(
-            `${apiUrl}showEmps`,
-            {
-              headers: {
-                Accept: "application/json",
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
+          const response = await axios.get(`${apiUrl}showEmps`, {
+            headers: {
+              Accept: "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          });
           setdata(response.data.data);
         } catch (error) {
           console.log(error);
@@ -61,7 +58,7 @@ const ShowEmp = () => {
     return date;
   };
   return (
-    <div className="tableEmp bg-white border shadow rounded-[7px] p-10 mx-9">
+    <div className="tableEmp bg-white border shadow rounded-[7px] p-10 mx-9 mb-8">
       <form>
         <input
           type="text"

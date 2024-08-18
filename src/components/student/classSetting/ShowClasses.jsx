@@ -1,9 +1,8 @@
 import { React, useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { PopUp } from "../../../App";
-import CloseIcon from "@mui/icons-material/Close";
-
-const ShowClasses = () => {
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+const ShowClasses = ({ state, setState }) => {
   const { reload, setclick } = useContext(PopUp);
   const [data, setData] = useState({});
   const [error, setError] = useState("");
@@ -32,8 +31,8 @@ const ShowClasses = () => {
         console.log(e);
       }
     };
-    getData();
-  }, [delSetting, reload]);
+    if (state[1]) getData();
+  }, [delSetting, reload, state]);
 
   const handleDel = async (id) => {
     try {
@@ -59,49 +58,64 @@ const ShowClasses = () => {
 
   return (
     <div className="container">
-      <div className="p=10 mt-7 lg:mr-32 ml-10">
-        <div className="flex justify-between  items-center mt-20">
-          <h1 className=" font-bold text-xl ">الصفوف</h1>
-          <button
-            onClick={() => setclick([0, 0, 0, 0, 0, 0, 0, 0, 0, 1])}
-            className="adding ml-8"
-          >
-            إضافة
-          </button>
-        </div>
-        {data[0] && (
+      <div className="tableEmp bg-white border shadow rounded-[7px] p-10 m-9">
+        {!state[1] && (
           <div
-            className="container  p-10 mx-9"
-            style={{
-              width: "calc(100% - 100px)",
-              marginTop: "20px",
-              padding: "0 20px",
-            }}
+            className="flex justify-between items-center my-4 cursor-pointer "
+            onClick={() => setState([false, !state[1]])}
           >
-            <div className="header grid grid-cols-3 items-center text-center py-4 text-sm font-bold border-b-2">
-              <h2>الصف</h2>
-              <h2>الشعبة</h2>
-              <h2>حذف</h2>
+            <h1
+              className=" font-bold text-xl cursor-pointer"
+              onClick={() => setState([false, !state[1]])}
+            >
+              الصفوف
+            </h1>
+            <ArrowDropDownIcon />
+          </div>
+        )}
+        {state[1] && (
+          <div>
+            <div
+              className="flex justify-between items-center my-4 cursor-pointer"
+              onClick={() => setState([false, !state[1]])}
+            >
+              <h1 className=" font-bold text-xl ">الصفوف</h1>
+              <button
+                onClick={() => setclick([0, 0, 0, 0, 0, 0, 0, 0, 0, 1])}
+                className="adding ml-8"
+              >
+                إضافة
+              </button>
+            </div>
+            {data[0] && (
+              <div className="border-t-2">
+                <div className="header grid grid-cols-2  py-4 font-bold">
+                  <h2>الصف</h2>
+                  <h2>الشعبة</h2>
 
-              <h2></h2>
-            </div>
-            <div className="overflow-auto  border-b-2">
-              {data.map((item, index) => (
-                <div
-                  className="header grid grid-cols-3 text-center items-center py-2 border-b-2"
-                  key={index}
-                >
-                  <h2 className=" text-sm">{item.name}</h2>
-                  <h2 className=" text-sm">{item.section}</h2>
-                  <button
-                    className="text-red-500"
-                    onClick={() => handleDel(item._id)}
-                  >
-                    <CloseIcon />
-                  </button>
+                  <h2></h2>
                 </div>
-              ))}
-            </div>
+                <div className="max-h-72 overflow-auto ">
+                  {data.map((item, index) => (
+                    <div
+                      className="header grid grid-cols-2 border-b py-4 mt-2 emp_content  "
+                      key={index}
+                    >
+                      <h2 className=" text-sm">{item.name}</h2>
+                      <div className="flex justify-between w-1/2">
+                        <h2 className=" text-sm">{item.section}</h2>
+                        <button
+                          className="text-red-500"
+                          onClick={() => handleDel(item._id)}
+                        >
+                          حذف
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>

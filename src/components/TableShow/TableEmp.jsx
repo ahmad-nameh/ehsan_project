@@ -37,35 +37,37 @@ export default function TableEmp() {
   };
 
   return (
-      <div className="tableEmp bg-white border shadow rounded-[7px] p-10 mx-9">
-        <div className="header grid grid-cols-8  py-4 font-bold">
-          <h2>الاسم</h2>
-          <h2>المؤهل العلمي</h2>
-          <h2>العمل الحالي</h2>
-          <h2>العمل المطلوب</h2>
-          <h2>الحالة الاجتماعية</h2>
-          <h2>تاريخ الولادة</h2>
-          <h2>عنوان السكن</h2>
-          <h2>الهاتف</h2>
-        </div>
-        {data[0]&&<div>
-        {data.map((i, ii) => (
-          <div
-            key={i._id}
-            className="header grid grid-cols-8 border-b  py-6 cursor-pointer  hover:bg-gray-100"
-            onClick={() => showInfo(i._id)}
-          >
-            <h2>{i.name}</h2>
-            <h2>{i.academic_qualification}</h2>
-            <h2>{i.current_work}</h2>
-            <h2>{i.wanted_work}</h2>
-            <h2>{i.social_status_id.name}</h2>
-            <h2>{date(i.birth_date)}</h2>
-            <h2>{i.address}</h2>
-            <h2>{i.mobile_num}</h2>
-          </div>
-        ))}
-        </div>}
+    <div className="tableEmp bg-white border shadow rounded-[7px] p-10 mx-9 mb-8">
+      <div className="header grid grid-cols-8  py-4 font-bold">
+        <h2>الاسم</h2>
+        <h2>المؤهل العلمي</h2>
+        <h2>العمل الحالي</h2>
+        <h2>العمل المطلوب</h2>
+        <h2>الحالة الاجتماعية</h2>
+        <h2>تاريخ الولادة</h2>
+        <h2>عنوان السكن</h2>
+        <h2>الهاتف</h2>
       </div>
-    )
+      {data[0] && (
+        <div className="max-h-72 overflow-auto">
+          {data.map((i, ii) => (
+            <div
+              key={i._id}
+              className="header grid grid-cols-8 border-b  py-6 cursor-pointer  hover:bg-gray-100"
+              onClick={() => showInfo(i._id)}
+            >
+              <h2>{i.name}</h2>
+              <h2>{i.academic_qualification}</h2>
+              <h2>{i.current_work}</h2>
+              <h2>{i.wanted_work}</h2>
+              <h2>{i.social_status_id.name}</h2>
+              <h2>{date(i.birth_date)}</h2>
+              <h2>{i.address}</h2>
+              <h2>{i.mobile_num}</h2>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
 }

@@ -18,7 +18,9 @@ export default function ShowTeachReq() {
       .then((res) => setdata(res.subjects))
       .catch((error) => console.log(error));
   }, []);
-  {data&&console.log(data[0])}
+  {
+    data && console.log(data[0]);
+  }
 
   useEffect(() => {
     const UrlSer = process.env.REACT_APP_API_URL + "showStatuses";
@@ -48,24 +50,26 @@ export default function ShowTeachReq() {
         <h2>عنوان السكن</h2>
         <h2>الهاتف</h2>
       </div>
-      {data&&<div>
-        {data.map((i, ii) => (
-          <div
-            key={i._id}
-            className="header grid grid-cols-8 border-b  py-6  cursor-pointer  hover:bg-gray-100"
-            onClick={() => showInfo(i._id)}
-          >
-            <h2>{i.name}</h2>
-            <h2>{i.academic_qualification}</h2>
-            <h2>{i.issuing_authority}</h2>
-            <h2>{i.social_status_id.name}</h2>
-            <h2>{i.birth_city}</h2>
-            <h2>{date(i.birth_date)}</h2>
-            <h2>{i.address}</h2>
-            <h2>{i.mobile_num}</h2>
-          </div>
-        ))}
-      </div>}
+      {data && (
+        <div className="max-h-72 overflow-auto">
+          {data.map((i, ii) => (
+            <div
+              key={i._id}
+              className="header grid grid-cols-8 border-b  py-6  cursor-pointer  hover:bg-gray-100"
+              onClick={() => showInfo(i._id)}
+            >
+              <h2>{i.name}</h2>
+              <h2>{i.academic_qualification}</h2>
+              <h2>{i.issuing_authority}</h2>
+              <h2>{i.social_status_id.name}</h2>
+              <h2>{i.birth_city}</h2>
+              <h2>{date(i.birth_date)}</h2>
+              <h2>{i.address}</h2>
+              <h2>{i.mobile_num}</h2>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

@@ -1,9 +1,8 @@
 import { React, useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { PopUp } from "../../../App";
-import CloseIcon from "@mui/icons-material/Close";
-
-const ShowAdminForClasses = () => {
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+const ShowAdminForClasses = ({ state, setState }) => {
   const { setclick } = useContext(PopUp);
   const [data, setData] = useState({});
   const [error, setError] = useState("");
@@ -31,8 +30,8 @@ const ShowAdminForClasses = () => {
         console.log(e);
       }
     };
-    getData();
-  }, [delSetting]);
+    if (state[0]) getData();
+  }, [delSetting, state]);
 
   const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -60,54 +59,64 @@ const ShowAdminForClasses = () => {
 
   return (
     <div className="container">
-      <div className="p=10 mt-7 lg:mr-32 ml-10">
-        <div className="flex justify-between items-center">
-          <h1 className=" font-bold text-xl my-10">اسناد الموجهين للصفوف</h1>
-          <button
-            onClick={() => setclick([0, 0, 0, 0, 0, 0, 0, 0, 1])}
-            className="adding ml-8"
-          >
-            إضافة
-          </button>
-        </div>
-        {data[0] && (
+      <div className="tableEmp bg-white border shadow rounded-[7px] p-10 m-9  ">
+        {!state[0] && (
           <div
-            className="container  p-10 mx-9"
-            style={{
-              width: "calc(100% - 100px)",
-              marginTop: "20px",
-              padding: "0 20px",
-            }}
+            onClick={() => setState([!state[0]])}
+            className="flex justify-between items-center my-4 cursor-pointer"
           >
-            <div className="header grid grid-cols-3 items-center text-center py-4 text-sm font-bold border-b-2">
-              <h2>الموجه</h2>
-              <h2>الشعب التي يشرف عليها</h2>
-
-              <h2></h2>
+            <h1 className=" font-bold text-xl cursor-pointer">
+              اسناد الموجهين للصفوف
+            </h1>
+            <ArrowDropDownIcon />
+          </div>
+        )}
+        {state[0] && (
+          <div>
+            <div
+              onClick={() => setState([!state[0]])}
+              className="flex justify-between items-center my-4 cursor-pointer"
+            >
+              <h1 className=" font-bold text-xl ">اسناد الموجهين للصفوف</h1>
+              <button
+                onClick={() => setclick([0, 0, 0, 0, 0, 0, 0, 0, 1])}
+                className="adding ml-8"
+              >
+                إضافة
+              </button>
             </div>
-            <div className="overflow-auto  border-b-2">
-              {data.map((item, index) => (
-                <div
-                  className="header grid grid-cols-3 text-center items-center py-4 border-b-2"
-                  key={index}
-                >
-                  <h2 className="font-bold text-sm">{item.admin?.name}</h2>
-                  <div className="col-span-2 flex flex-col items-center">
-                    {item.classes?.map((i) => (
-                      <div className="flex justify-between w-3/4">
-                        <p>{`الصف ${i.name} الشعبة ${i.section}`}</p>
-                        <button
-                          className="text-red-500"
-                          onClick={() => handleDel(i._id)}
-                        >
-                          <CloseIcon />
-                        </button>
-                      </div>
-                    ))}
-                  </div>
+            {data[0] && (
+              <div className="border-t-2">
+                <div className="header grid grid-cols-2 py-4 font-bold">
+                  <h2>الموجه</h2>
+                  <h2>الشعب التي يشرف عليها</h2>
                 </div>
-              ))}
-            </div>
+
+                <div className="max-h-72 overflow-auto ">
+                  {data.map((item, index) => (
+                    <div
+                      className="header grid grid-cols-3 border-b py-4 mt-2 emp_content  "
+                      key={index}
+                    >
+                      <h2 className="font-bold text-sm">{item.admin?.name}</h2>
+                      <div className="col-span-2 flex flex-col items-center ">
+                        {item.classes?.map((i) => (
+                          <div className="flex justify-between w-1/2">
+                            <p>{`الصف ${i.name} الشعبة ${i.section}`}</p>
+                            <button
+                              className="text-red-500"
+                              onClick={() => handleDel(i._id)}
+                            >
+                              حذف
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>

@@ -1,113 +1,114 @@
 input {
-    transition: 0.5s;
+  transition: 0.5s;
 }
 .icon.css-i4bv87-MuiSvgIcon-root {
-    font-size: 50px !important;
-    padding: 4px;
-    border-width: 4px;
-    border-style: solid;
-    border-color: var(--color1) var(--color1) #313131 #313131;
-    position: relative;
+  font-size: 50px !important;
+  padding: 4px;
+  border-width: 4px;
+  border-style: solid;
+  border-color: var(--color1) var(--color1) #313131 #313131;
+  position: relative;
 }
 .icon::before {
-    content: "sss ";
-    position: absolute;
-    top: 0;
-    left: 100px;
-    width: 20px;
-    height: 2px;
-    background-color: aqua;
+  content: "sss ";
+  position: absolute;
+  top: 0;
+  left: 100px;
+  width: 20px;
+  height: 2px;
+  background-color: aqua;
 }
 form.Deta input {
-    pointer-events: none;
-    font-weight: 700;
+  pointer-events: none;
+  font-weight: 700;
 }
 form.Deta select {
-    padding: 1px 4px !important;
-    margin: 0 !important;
-    /* pointer-events: none; */
+  padding: 1px 4px !important;
+  margin: 0 !important;
+  /* pointer-events: none; */
 }
 form.Deta input.editable {
-    pointer-events: all;
-    outline: 1px solid black;
-    padding: 0 8px;
+  pointer-events: all;
+  outline: 1px solid black;
+  padding: 0 8px;
 }
 
 .addstu label {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--color6);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color6);
 }
 .addClassmate label {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--color6);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color6);
 }
 .addClassmate input {
-    outline: none;
-    border: 1px solid rgba(0, 0, 0, 0.421);
-    padding: 2px 6px;
-    border-radius: 5px;
-    font-size: 16px;
-    margin: 8px 0 16px;
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.421);
+  padding: 2px 6px;
+  border-radius: 5px;
+  font-size: 16px;
+  margin: 8px 0 16px;
 }
 .addClassmate ul {
-    margin: 8px 0 16px;
+  margin: 8px 0 16px;
 }
-.addstu input,.addstu textarea{
-    outline: none;
-    border: 1px solid rgba(0, 0, 0, 0.421);
-    padding: 8px;
-    border-radius: 5px;
-    font-size: 16px;
-    margin: 8px 0 16px;
+.addstu input,
+.addstu textarea {
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.421);
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 16px;
+  margin: 8px 0 16px;
 }
-.addGrade input{
-    outline: none;
-    border: 1px solid rgba(0, 0, 0, 0.421);
-    padding: 6px;
-    border-radius: 5px;
-    font-size: 16px;
-    margin: 5px 0 ;
+.addGrade input {
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.421);
+  padding: 6px;
+  border-radius: 5px;
+  font-size: 16px;
+  margin: 5px 0;
 }
 .addGrade label {
-    font-weight: 700;
+  font-weight: 700;
 }
 .addGradeSelectData input {
-    outline: none;
-    border: 1px solid rgba(0, 0, 0, 0.421);
-    padding: 8px;
-    border-radius: 5px;
-    font-size: 16px;
-    margin: 8px 0 ;
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.421);
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 16px;
+  margin: 8px 0;
 }
 .addstu textarea {
-    max-height: 100px;
+  max-height: 100px;
 }
 
 .classmate .css-i4bv87-MuiSvgIcon-root {
-    font-size: 17px;
-    color: white;
-    border-radius: 50%;
-    padding: 2px;
+  font-size: 17px;
+  color: white;
+  border-radius: 50%;
+  padding: 2px;
 }
 .classmate .css-i4bv87-MuiSvgIcon-root:nth-of-type(1) {
-    background-color: red;
+  background-color: red;
 }
 .classmate .css-i4bv87-MuiSvgIcon-root:nth-of-type(2) {
-    background-color: black;
-    margin-top: 2px;
+  background-color: black;
+  margin-top: 2px;
 }
 .classmate .css-i4bv87-MuiSvgIcon-root.clock {
-    background-color: transparent;
-    color: rgb(107 114 128);
-    font-size: 25px;
+  background-color: transparent;
+  color: rgb(107 114 128);
+  font-size: 25px;
 }
 
 .pdo {
-    width: calc(100% - 78px);
-    margin-right: 78px;
-    /* padding: 0 20px;
+  width: calc(100% - 78px);
+  margin-right: 78px;
+  /* padding: 0 20px;
     background-color: var(--color2);
     font-weight: 500;
     font-size: 18px;
@@ -122,19 +123,26 @@ form.Deta input.editable {
   }
 }
 .adding {
-    padding: 10px 20px;
-    color: white;
-    background-color: var(--color6);
-    border-radius: 12px;
-    display: block;
+  padding: 10px 20px;
+  color: white;
+  background-color: var(--color6);
+  border-radius: 12px;
+  display: block;
 }
 
 .css-1la267r-MuiAreaElement-root {
-    fill: #a3d7ec9c !important;
+  fill: #a3d7ec9c !important;
 }
 .css-xyaj9i-MuiMarkElement-root {
-    stroke: #a3d7ec9c !important;
+  stroke: #a3d7ec9c !important;
 }
 .css-wn5hww-MuiLineElement-root {
-    stroke: #a3d7ec9c !important;
+  stroke: #a3d7ec9c !important;
+}
+.adding[type="submit"] {
+  padding: 10px 20px;
+  color: white;
+  background-color: var(--color6);
+  border-radius: 12px;
+  display: block;
 }
