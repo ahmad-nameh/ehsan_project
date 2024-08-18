@@ -28,19 +28,19 @@ const MainInfoArchive = () => {
   const [numOfChild, setNumofChild] = useState(0);
   const [emp_id, setEmpId] = useState();
 
-  const { click ,tclick , setclick} = useContext(PopUp);
+  const { click, tclick, setclick } = useContext(PopUp);
 
   const [nat, setNat] = useState([]);
   const [ser, setSer] = useState([]);
   const [ma, setMa] = useState([]);
   const [se, setSe] = useState([]);
-  const apiUrl = process.env.REACT_APP_API_URL
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     if (location.state && location.state.empid !== null) {
       setEmpId(location.state.empid);
       const fetchData = async () => {
-        setclick([0,0,0,0,0,1])
+        setclick([0, 0, 0, 0, 0, 1]);
         try {
           const response = await axios.get(
             `${apiUrl}showEmpData/${location.state.empid}`,
@@ -51,8 +51,8 @@ const MainInfoArchive = () => {
               },
             }
           );
-          if(response.data.status) {
-            setclick([0])
+          if (response.data.status) {
+            setclick([0]);
           }
           console.log(response);
           setAlldata(response.data);
@@ -60,7 +60,7 @@ const MainInfoArchive = () => {
           setNumofChild(response.data.data[0].childs_num);
           if (response.data.data[0].autograph_photo) {
             const photoFilename = response.data.data[0].autograph_photo;
-            const photoUrl = `http://127.0.0.1:8000/${photoFilename}`;
+            const photoUrl = `${photoFilename}`;
 
             setProfilePhoto(photoUrl);
 
@@ -156,32 +156,27 @@ const MainInfoArchive = () => {
     e.preventDefault();
     let response;
     try {
-      setclick([0,0,0,0,0,1])
+      setclick([0, 0, 0, 0, 0, 1]);
       const formDataToSend = new FormData();
       Object.entries(formData).forEach(([key, value]) => {
         formDataToSend.append(key, value);
       });
 
-      response = await axios.post(
-        `${apiUrl}addEmp`,
-        formDataToSend,
-        {
-          headers: {
-            Accept: "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      console.log(formDataToSend)
+      response = await axios.post(`${apiUrl}addEmp`, formDataToSend, {
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(formDataToSend);
       console.log(response);
-
 
       if (response.status == 200) {
         setEmpId(response.data.added_employee_id);
-        setclick([0,0,0,0,1]);
+        setclick([0, 0, 0, 0, 1]);
       }
     } catch (error) {
-      setclick([0])
+      setclick([0]);
       console.error(error);
     }
   };
@@ -220,7 +215,7 @@ const MainInfoArchive = () => {
   return (
     <div className="registeration">
       <form onSubmit={handleSubmit}>
-        {formData&& (
+        {formData && (
           <div className="container">
             <span className="arrowBack" onClick={() => navigate(-1)}>
               <ArrowForwardIcon fontSize="small" />
@@ -231,7 +226,7 @@ const MainInfoArchive = () => {
               <div>
                 <label htmlFor="photo-upload" className="custom-img-upload">
                   <div className="img-upload">
-                    <img src={profilePhoto} alt="img" />
+                    {<img src={profilePhoto} alt="img" />}
                   </div>
                   <input id="photo-upload" type="file" onChange={photoUpload} />
                 </label>
@@ -581,7 +576,7 @@ const MainInfoArchive = () => {
             </button>
           </div>
         )}
-{/* 
+        {/* 
         {click[0] ? (
           <motion.div
             initial={{ opacity: 0 }}

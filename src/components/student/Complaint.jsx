@@ -44,28 +44,17 @@ const Complaint = () => {
           <h1 className=" font-bold text-xl my-10">المقترحات</h1>
         </div>
         {data[0] ? (
-          <div
-            className="container  p-10 mx-9"
-            style={{
-              width: "calc(100% - 100px)",
-              marginRight: "100px",
-              marginTop: "20px",
-              padding: "0 20px",
-            }}
-          >
-            <div className="header grid grid-cols-5 items-center py-4 text-sm font-bold border-b-2">
+          <div className="tableEmp bg-white border shadow rounded-[7px] p-10 m-9">
+            <div className="header grid grid-cols-4 items-center py-4 text-l font-bold border-b-2">
               <h2>نوع الاقتراح</h2>
               <h2>التاريخ</h2>
               <h2>اسم المقدم</h2>
               <h2>وصف</h2>
             </div>
-            <div
-              className="overflow-auto  border-b-2"
-              style={{ maxHeight: "65vh" }}
-            >
+            <div className="overflow-auto  " style={{ maxHeight: "50vh" }}>
               {data.map((item, index) => (
                 <div
-                  className="header grid grid-cols-5 items-center py-4"
+                  className="header grid grid-cols-4 items-center py-4"
                   key={index}
                 >
                   <h2 className="font-bold text-sm">{item.type}</h2>
